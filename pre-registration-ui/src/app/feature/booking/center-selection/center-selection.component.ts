@@ -29,6 +29,7 @@ export class CenterSelectionComponent
   canDeactivateFlag = true;
   locationTypes = [];
   identityData = [];
+  locationHierarchyFields = [];
   allLocationTypes = [];
   locationType = null;
   searchText = null;
@@ -162,6 +163,9 @@ export class CenterSelectionComponent
         let identityJsonSpec =
           response[appConstants.RESPONSE]["jsonSpec"]["identity"];
         this.identityData = identityJsonSpec["identity"];
+        if (identityJsonSpec["locationHierarchy"]) {
+          this.locationHierarchyFields = [].concat(...identityJsonSpec["locationHierarchy"]);
+        }
         resolve(true);
       },
       (error) => {
@@ -182,7 +186,9 @@ export class CenterSelectionComponent
         obj.controlType !== null &&
         !(obj.controlType === "fileupload")
       ) {
-        if (obj.locationHierarchyLevel && this.recommendedCenterLocCode == obj.locationHierarchyLevel) {
+        //only fields in locationHierarchy, ex: placeOfBirth also has a locationHierarchyLevel but is not the applicant's address
+        if (obj.locationHierarchyLevel && this.recommendedCenterLocCode == obj.locationHierarchyLevel &&
+          (this.locationHierarchyFields.length == 0 || this.locationHierarchyFields.includes(obj.id))) {
           uiFieldName = obj.id;
         }
       }

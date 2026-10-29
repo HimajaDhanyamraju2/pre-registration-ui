@@ -111,6 +111,13 @@ export class PreviewComponent implements OnInit {
     this.locationHeirarchies.forEach((element) => {
       locations.push(...element);
     });
+    //location dropdowns loaded by "locationHierarchyLevel" (ex: placeOfBirth)
+    this.uiFields.forEach((control) => {
+      if (control.locationHierarchyLevel && control.fieldType !== "dynamic" &&
+        !locations.includes(control.id)) {
+        locations.push(control.id);
+      }
+    });
     let controlId = "";
     for (let i = 0; i < this.controlIds.length; i++) {
 

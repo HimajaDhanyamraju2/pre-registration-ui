@@ -31,7 +31,7 @@ import {
   MatKeyboardService,
   MatKeyboardRef,
   MatKeyboardComponent,
-} from "ngx7-material-keyboard";
+} from '@ngx-material-keyboard/core';
 import { LogService } from "src/app/shared/logger/log.service";
 import { FormDeactivateGuardService } from "src/app/shared/can-deactivate-guard/form-guard/form-deactivate-guard.service";
 import { Subscription } from "rxjs";
@@ -1161,8 +1161,86 @@ export class DemographicComponent
           parentLocCode,
           locationHeirarchy
         );
-      }, this);  
+      }, this);
     }, this);
+    this.setLocationsByLevel();
+  }
+
+  /**
+   * @description Location dropdowns which are not part of any locationHierarchy,
+   * but have "locationHierarchyLevel" in UI specs, are loaded with all locations
+   * at that level (ex: placeOfBirth with all districts).
+   *
+   * @private
+   * @memberof DemographicComponent
+   */
+  private async setLocationsByLevel() {
+    //find the top location code and its level, ex: island has parentLocCode "POR" at level 1, so "POR" is level 0
+    let topLocCode = null;
+    let topLocLevel = 0;
+    this.identityData.forEach((obj) => {
+      if (!topLocCode && obj.parentLocCode && obj.locationHierarchyLevel &&
+        this.isThisFieldInLocationHeirarchies(obj.id)) {
+        topLocCode = obj.parentLocCode;
+        topLocLevel = Number(obj.locationHierarchyLevel) - 1;
+      }
+    });
+    if (!topLocCode) {
+      topLocCode = this.dataStorageService.getLocationMetadataHirearchy();
+      topLocLevel = 0;
+    }
+    if (!topLocCode) return;
+    const levelFields = this.uiFields.filter(
+      (uiField) =>
+        uiField.controlType === "dropdown" &&
+        uiField.fieldType !== "dynamic" &&
+        uiField.locationHierarchyLevel &&
+        !this.isThisFieldInLocationHeirarchies(uiField.id)
+    );
+    for (const uiField of levelFields) {
+      const targetLevel = Number(uiField.locationHierarchyLevel);
+      if (targetLevel <= topLocLevel) continue;
+      //walk down the hierarchy till the parent level of the target level
+      let parentLocCodes = [topLocCode];
+      for (let level = topLocLevel + 1; level < targetLevel; level++) {
+        const childCodesArr = await Promise.all(
+          parentLocCodes.map((locCode) => this.getChildLocationCodes(locCode))
+        );
+        parentLocCodes = [].concat(...childCodesArr);
+      }
+      for (const locCode of parentLocCodes) {
+        await Promise.all(await this.loadLocationData(locCode, uiField.id));
+      }
+    }
+  }
+
+  /**
+   * @description This returns the codes of immediate child locations of the given location code.
+   *
+   * @param locationCode location code of parent location
+   */
+  private getChildLocationCodes(locationCode: string): Promise<string[]> {
+    return new Promise((resolve) => {
+      this.subscriptions.push(
+        this.dataStorageService
+          .getLocationImmediateHierearchy(this.dataCaptureLanguages[0], locationCode)
+          .subscribe(
+            (response) => {
+              let codes = [];
+              if (response[appConstants.RESPONSE]) {
+                codes = response[appConstants.RESPONSE][
+                  appConstants.DEMOGRAPHIC_RESPONSE_KEYS.locations
+                ].map((element) => element.code);
+              }
+              resolve(codes);
+            },
+            (error) => {
+              //loading locations can be fail proof
+              resolve([]);
+            }
+          )
+      );
+    });
   }
   /**
    * @description This is to reset the input values
@@ -1216,6 +1294,8 @@ export class DemographicComponent
               (error) => {
                 //loading locations can be fail proof, no need to display err promt to user
                 //this.showErrorMessage(error);
+                //resolve anyway, else Promise.all in dropdownApiCall never settles and the dropdown stays empty
+                resolve(false);
               }
             )
           ); 

@@ -1,0 +1,835 @@
+{
+  "quick_guide": {
+    "breadcrumb": {
+      "home": "Início",
+      "getting_started": "Primeiros Passos"
+    },
+    "headerText": {
+      "line1": "Para realizar o pré-registro de um ou mais solicitantes, preencha os dados demográficos e envie os documentos necessários. Para agendar um atendimento, escolha o centro de registro, a data e o horário de sua preferência. Após o pré-registro bem-sucedido, você receberá uma notificação no e-mail ou número de telefone informado.",
+      "line2": "Clique nas seções a seguir para obter mais informações sobre como preencher o formulário de pré-registro."
+    },
+    "select_language": {
+      "name": "Selecionar idioma de preferência",
+      "list": {
+        "line1": "Na página de login, clique no menu suspenso de idiomas para visualizar a lista de idiomas",
+        "line2": "Selecione o idioma de sua preferência"
+      },
+      "note": "Observação: os rótulos de campos e botões, bem como mensagens de erro e informações em todo o aplicativo, serão exibidos no idioma selecionado."
+    },
+    "login": {
+      "name": "Login",
+      "list": {
+        "line1": "Na página de login, insira um endereço de e-mail válido ou número de telefone celular no campo correspondente.",
+        "line2": "Selecione o campo do captcha",
+        "line3": "Clique em Enviar OTP para receber uma Senha de Uso Único (OTP) no e-mail ou número de telefone informado.",
+        "line4": "Insira o OTP no campo apropriado e clique no botão Verificar."
+      },
+      "note": "Observação: caso você não tenha recebido o OTP, clique em Reenviar para receber um novo código e informe o OTP recém-recebido.",
+      "line": "Após a verificação do OTP, você poderá criar, visualizar ou modificar sua aplicação de pré-registro."
+    },
+    "select_data_capture_language": {
+      "name": "Selecionar idioma de captura de dados",
+      "list": {
+        "line1": "Um usuário que acessa o sistema pela primeira vez e não possui aplicações será solicitado a selecionar o idioma de captura de dados. O mesmo conjunto de idiomas será utilizado para as próximas aplicações criadas na mesma sessão.",
+        "line2": "O idioma selecionado na tela de login será pré-selecionado na janela de seleção do idioma de captura de dados.",
+        "line3": "O usuário pode alterar essa seleção clicando no botão ALTERAR IDIOMAS DE CAPTURA DE DADOS."
+      },
+      "note": "Observação: esta opção estará disponível apenas se o emissor do documento de identidade tiver configurado o uso de idiomas opcionais."
+    },
+    "t&c": {
+      "name": "Aceitar Termos e Condições",
+      "list": {
+        "line1": "Na página de Dados Demográficos, recomenda-se a leitura dos Termos e Condições e a seleção da caixa de confirmação para concordar. Este consentimento autoriza o armazenamento e o processamento de suas informações pessoais.",
+        "line2": "Clique em Aceitar para concordar e, em seguida, preencha os dados demográficos."
+      },
+      "note": "Observação: o consentimento do usuário é obrigatório para criar ou atualizar aplicações. O conteúdo será exibido em todos os idiomas de captura de dados."
+    },
+    "demographic": {
+      "name": "Preencher Dados Demográficos",
+      "list": {
+        "line1": "Preencha todos os seus dados demográficos, incluindo Nome, Idade/Data de Nascimento, Gênero, Status de Residência, Endereço, Número de Telefone Celular, E-mail, entre outros.",
+        "line1_note": "Observação: você pode informar sua idade ou sua data de nascimento (DN).",
+        "line2": "Você também pode alterar ou verificar seus dados demográficos no segundo idioma exibido no lado direito.",
+        "line3": "Após preencher e verificar seus dados demográficos, clique em Continuar para enviar os documentos."
+      },
+      "line": "Observação: os rótulos de campos e botões, bem como mensagens de erro e informações, serão exibidos no idioma preferido selecionado na tela de login."
+    },
+    "documents": {
+      "name": "Enviar Documentos",
+      "list": {
+        "line1": "Na página Enviar Documentos, selecione o documento (por exemplo, Passaporte, Número de Identidade de Referência, etc.) na lista suspensa conforme a categoria de documento aplicável.",
+        "line2": "Clique em Procurar para abrir uma janela e localizar a pasta em seu computador ou dispositivo removível onde o documento digitalizado foi salvo.",
+        "line3": "Selecione o arquivo que deseja enviar.",
+        "line4": "Após o envio bem-sucedido, o documento será exibido no lado direito. Verifique se o documento correto foi enviado.",
+        "line5": "Repita os passos de 1 a 4 para enviar documentos de cada categoria aplicável.",
+        "line6": "Ao adicionar um solicitante, caso o Comprovante de Endereço (POA) seja o mesmo de um usuário já existente que tenha enviado esse documento, selecione a opção Mesmo que e escolha o nome do solicitante.",
+        "line7": "Após concluir o envio de todos os documentos, clique em Continuar para visualizar sua aplicação."
+      }
+    },
+    "preview": {
+      "name": "Visualizar Dados",
+      "list": {
+        "line1": "Na página de Visualização, caso deseje alterar seus dados demográficos (Nome, Idade, etc.), clique em Modificar no canto superior direito, ao lado da seção Dados Demográficos.",
+        "line2": "Para modificar os documentos enviados, clique em Modificar no canto inferior direito, ao lado da seção Documentos.",
+        "line3": "Caso deseje adicionar um novo solicitante, clique em Adicionar Solicitante.",
+        "line3_note": "Observação: ao clicar em Adicionar Solicitante, você será direcionado para a página de Dados Demográficos para fornecer o consentimento e inserir os dados e documentos necessários.",
+        "line4": "Clique em Agendar Agora para marcar seu atendimento."
+      }
+    },
+    "CenterSelection": {
+      "name": "Escolher um Centro de Registro",
+      "list": {
+        "line1": "Na página Agendar Atendimento, você pode localizar um centro de registro utilizando as três opções a seguir:",
+        "line1_note": "Observação: os centros de registro recomendados são exibidos automaticamente com base em seus dados demográficos (Código Postal).",
+        "subList": {
+          "line1": "Clique em Centros Próximos para visualizar os centros de registro com base em sua localização geográfica.",
+          "line2": "Utilize o campo de pesquisa para localizar um centro de registro conforme seus critérios de busca.",
+          "line3": "Clique em Centros Recomendados para visualizar centros de registro com base em seus dados demográficos (Código Postal)."
+        },
+        "line2": "O mapa do centro de registro selecionado será exibido no lado direito da tela.",
+        "line3": "Utilizando qualquer uma das opções acima, selecione o centro de registro desejado e clique em Continuar para agendar o atendimento."
+      }
+    },
+    "Booking": {
+      "name": "Agendar um Atendimento",
+      "list": {
+        "line1": "O sistema exibe a lista de dias disponíveis no calendário juntamente com o número de atendimentos disponíveis. Selecione a data de sua preferência.",
+        "line2": "A lista de horários disponíveis para a data selecionada é dividida entre Manhã e Tarde. Selecione a opção desejada.",
+        "line3": "Selecione o horário de sua preferência na lista.",
+        "line4": "Selecione o nome do solicitante para o qual deseja agendar o atendimento.",
+        "line4_note": "Observação: a lista de nomes dos solicitantes é exibida no canto inferior direito.",
+        "line5": "Verifique os horários selecionados em relação aos nomes dos solicitantes.",
+        "line6": "Clique em Enviar para visualizar o comprovante de sua aplicação."
+      }
+    },
+    "Acknowledgement": {
+      "name": "Visualizar Comprovante",
+      "tablename": "Comprovante",
+      "list": {
+        "line1": "Após a conclusão bem-sucedida da aplicação de pré-registro, você receberá um comprovante.",
+        "line2": "Você pode imprimir, baixar, enviar por e-mail ou SMS o seu comprovante.",
+        "subList": {
+          "line1": "Para imprimir o comprovante, clique em Imprimir.",
+          "line2": "Para baixar o comprovante, clique em Baixar PDF.",
+          "line3": "Para adicionar destinatários adicionais para receber o comprovante da aplicação, siga os passos abaixo:",
+          "subList": {
+            "line1": "Clique em Enviar E-mail/SMS.",
+            "line2": "Insira o número de telefone celular e/ou o endereço de e-mail nos campos correspondentes.",
+            "line3": "Clique em Enviar para receber o comprovante no e-mail ou número de telefone informado."
+          }
+        }
+      }
+    },
+    "status": {
+      "name": "Explicação do Status",
+      "tablename": "Tipos de Status",
+      "headers": {
+        "status": "Status",
+        "explanation": "Explicação"
+      },
+      "status": {
+        "pendingAppointment": "Atendimento Pendente",
+        "booked": "Agendado",
+        "expired": "Expirado",
+        "canceled": "Cancelado"
+      },
+      "explanation": {
+        "pendingAppointment": {
+          "line1": "Apenas os dados demográficos foram preenchidos",
+          "line1_action": "Ação: enviar os documentos e agendar um atendimento",
+          "line2": "Dados demográficos preenchidos e documentos enviados",
+          "line2_action": "Ação: agendar um atendimento"
+        },
+        "booked": {
+          "line1": "Dados demográficos preenchidos, documentos enviados e atendimento agendado",
+          "line1_action": "Ação: comparecer ao centro de registro na data e horário agendados"
+        },
+        "cancelled": {
+          "line1": "O atendimento foi cancelado"
+        },
+        "expired": {
+          "line1": "A data do atendimento já passou"
+        }
+      }
+    },
+    "addApplicant": {
+      "name": "Adicionar Novo Solicitante",
+      "line": "Na página Suas Aplicações, clique em Criar Nova Aplicação para gerar uma nova aplicação para um novo solicitante."
+    },
+    "modify": {
+      "name": "Modificar Dados",
+      "list": {
+        "line1": "Na página Suas Aplicações, clique em Modificar Informações para acessar a página de Dados Demográficos.",
+        "line2": "Na página de Dados Demográficos, altere as informações conforme necessário e clique em Continuar para acessar a página de Envio de Documentos.",
+        "line3": "Na página de Envio de Documentos, você pode modificar os documentos conforme necessário."
+      }
+    },
+    "rebook": {
+      "name": "Reagendar um Atendimento",
+      "list": {
+        "line1": "Na página Suas Aplicações, selecione a caixa de seleção do solicitante aplicável.",
+        "line2": "Clique em Agendar / Modificar Atendimento para reagendar.",
+        "line3": "Para mais informações, consulte a seção Agendar um Atendimento."
+      }
+    },
+    "cancelAppointment": {
+      "name": "Cancelar um Atendimento",
+      "list": {
+        "line1": "Na página Suas Aplicações, clique no ícone de exclusão da aplicação de pré-registro do solicitante.",
+        "line2": "Selecione a opção Cancelar atendimento e salvar os detalhes na janela exibida.",
+        "line3": "Clique em ENVIAR para cancelar o atendimento."
+      }
+    },
+    "discard": {
+      "name": "Descartar uma Aplicação",
+      "list": {
+        "line1": "Na página Suas Aplicações, clique no ícone de exclusão da aplicação de pré-registro do solicitante.",
+        "line2": "Selecione a opção Descartar aplicação inteira na janela exibida.",
+        "line3": "Clique em ENVIAR para descartar sua aplicação."
+      }
+    },
+    "Logout": {
+      "name": "Sair",
+      "list": {
+        "line1": "Clique em Sair no canto superior direito.",
+        "line2": "Clique em OK para sair da aplicação de pré-registro."
+      },
+      "line": "Faça login novamente com o mesmo número de telefone ou e-mail para acessar as aplicações salvas."
+    }
+  },
+  "faq": {
+    "breadcrumb": {
+      "home": "Início",
+      "getting_started": "FAQ"
+    },
+    "answer": "Resposta",
+    "questions": [
+      {
+        "question": "Não possuo número de telefone celular ou e-mail. Como posso criar a aplicação de pré-registro?",
+        "answer": "Você pode utilizar o número de telefone celular ou o endereço de e-mail de um amigo ou parente para acessar a aplicação de pré-registro."
+      },
+      {
+        "question": "Perdi o número de telefone celular ou e-mail que utilizei para criar a aplicação de pré-registro. O que devo fazer?",
+        "answer": "Crie uma nova conta utilizando um novo número de telefone celular ou um novo endereço de e-mail."
+      },
+      {
+        "question": "O que acontece quando seleciono um idioma específico na tela de login?",
+        "answer": "Selecione o idioma que você consegue ler e escrever com facilidade, pois todo o formulário será exibido no idioma escolhido."
+      },
+      {
+        "question": "E se eu não tiver os documentos necessários disponíveis ao preencher a aplicação de pré-registro?",
+        "answer": "Preencha os dados demográficos e salve a aplicação. Você poderá enviar os documentos posteriormente."
+      },
+      {
+        "question": "Posso agendar atendimento apenas para duas pessoas entre cinco solicitantes na aplicação de pré-registro?",
+        "answer": "Sim, você pode agendar atendimento para qualquer quantidade de pessoas dentre o total de solicitantes."
+      },
+      {
+        "question": "O que acontece se eu perder a data do atendimento?",
+        "answer": "Procure não perder a data do atendimento. Caso isso ocorra, reagende utilizando a opção “Modificar”."
+      },
+      {
+        "question": "Agendei um atendimento para o dia 10 de fevereiro. Posso alterar a data para 18 de fevereiro?",
+        "answer": "Sim. Caso o atendimento tenha expirado, você poderá agendar um novo atendimento para uma data futura."
+      },
+      {
+        "question": "Agendei um atendimento no centro de registro de Casablanca. Posso alterar o centro de registro para Rabat?",
+        "answer": "Não. No entanto, você pode cancelar o atendimento atual e agendar um novo atendimento em um local de sua preferência."
+      },
+      {
+        "question": "Modifiquei minhas informações após receber o comprovante. Preciso baixar ou imprimir o comprovante novamente?",
+        "answer": "A página de comprovante é apenas um documento de referência para lembrar o local e horário do atendimento. No centro de registro, suas informações mais recentes estarão automaticamente disponíveis. Portanto, não há necessidade oficial de imprimir ou baixar novamente."
+      },
+      {
+        "question": "Reagendei um atendimento após receber o comprovante. Preciso baixar ou imprimir o comprovante novamente?",
+        "answer": "A página de comprovante é apenas um documento de referência para lembrar o local e horário do atendimento. Você pode imprimir ou baixar novamente para sua conveniência, mas não há necessidade oficial de fazê-lo."
+      },
+      {
+        "question": "Outra pessoa pode enviar a aplicação em meu nome durante o processo de registro?",
+        "answer": "Não. O processo de registro exige coleta biométrica e captura de fotografia. Portanto, sua presença física no centro de registro é obrigatória."
+      },
+      {
+        "question": "Estou morando fora da minha residência permanente há dois anos. Qual comprovante de residência devo apresentar?",
+        "answer": "O governo decidirá a adequação desta pergunta e resposta."
+      },
+      {
+        "question": "Não possuo comprovante de residência para o meu endereço atual. O que devo fazer?",
+        "answer": "O governo decidirá a adequação desta pergunta e resposta."
+      },
+      {
+        "question": "Não possuo nenhum documento. O que devo fazer?",
+        "answer": "O governo decidirá a adequação desta pergunta e resposta."
+      },
+      {
+        "question": "Com quantos dias de antecedência posso cancelar ou reagendar um atendimento?",
+        "answer": "O governo decidirá a adequação desta pergunta e resposta."
+      },
+      {
+        "question": "Preciso levar os documentos originais ou cópias autenticadas ao visitar o centro de registro?",
+        "answer": "O governo decidirá a adequação desta pergunta e resposta."
+      }
+    ]
+  },
+  "header": {
+    "link_about": "PRIMEIROS PASSOS",
+    "link_faq": "FAQ",
+    "link_contact": "CONTATO",
+    "link_applications": "Suas Aplicações",
+    "link_logout": "Sair",
+    "link_login": "ENTRAR"
+  },
+  "login": {
+    "text": "Passos rápidos e fáceis",
+    "sub_text": "Pré-registro para",
+    "sub_text_UID": "Número de Identificação Único",
+    "label_email_num": "E-mail ou Número de Telefone",
+    "label_otp": "Inserir OTP",
+    "action_send": "Enviar OTP",
+    "action_resend": "Reenviar",
+    "action_verify": "Verificar",
+    "logout_msg": "O usuário deve acessar com o mesmo número de telefone celular ou endereço de e-mail para visualizar as aplicações criadas.",
+    "otp_valid_label": "Válido por",
+    "invalidEmail": "O endereço de e-mail informado é inválido",
+    "invalidMobile": "O número de telefone informado é inválido",
+    "invalidInput": "O endereço de e-mail ou número de telefone informado é inválido",
+    "serverUnavailable": "Não foi possível enviar o OTP. Tente novamente.",
+    "loading": "Enviando..."
+  },
+  "stepper": {
+    "link_demographic": "Dados Demográficos",
+    "link_upload_doc": "Enviar Documentos",
+    "link_book": "Agendar Atendimento",
+    "link_confirm": "Confirmação"
+  },
+  "demographic": {
+    "title": "Dados Demográficos",
+    "language": "Inglês",
+    "label_name": "Nome Completo",
+    "label_age": "Idade",
+    "date_dd": "DD",
+    "date_mm": "MM",
+    "date_yyyy": "AAAA",
+    "text_or": "OU",
+    "text_years": "Anos",
+    "text_gender": "Gênero",
+    "button_male": "Masculino",
+    "button_female": "Feminino",
+    "text_residence_status": "Status de Residência",
+    "button_national": "Nacional",
+    "button_foreigner": "Estrangeiro",
+    "label_address1": "Endereço Linha 1",
+    "label_address2": "Endereço Linha 2",
+    "label_address3": "Endereço Linha 3",
+    "label_region": "Região",
+    "label_province": "Província",
+    "label_city": "Cidade",
+    "label_zone": "Zona",
+    "label_mob_num": "Número de Telefone Celular",
+    "label_postalCode": "Código Postal",
+    "label_email_id": "E-mail",
+    "label_pin": "Número de Identidade de Referência",
+    "action_back": "VOLTAR",
+    "action_continue": "CONTINUAR",
+    "action_preview": "VISUALIZAR",
+    "read_only_message": "** Você não pode mais editar esta aplicação, pois já possui ou possuía um atendimento agendado para ela. Caso ainda deseje realizar alterações, descarte esta aplicação e crie uma nova.",
+    "read_only_message_prefetched": "** Você não pode mais editar esta aplicação, pois ela foi pré-carregada. Caso ainda deseje realizar alterações, descarte esta aplicação e crie uma nova.",
+    "lookup_search_message": "Pesquisar ",
+    "lookup_no_results_found": "Nenhum resultado correspondente encontrado.",
+    "change_data_capture_langs": "Alterar idiomas de captura de dados",
+    "change_data_capture_langs_msg": "Todos os dados inseridos serão descartados e será necessário reiniciar o processo. Por favor, confirme.",
+    "consent": {
+      "title": "Termos e Condições",
+      "subtitle": "Seu Consentimento",
+      "message": "Para fornecer consentimento para o armazenamento e utilização das informações pessoais fornecidas",
+      "checkCondition": "Clique para aceitar os termos e condições",
+      "acceptButton": "Aceitar",
+      "cancelButton": "Cancelar",
+      "alertMessageFirst": "Você será desconectado por não aceitar os Termos e Condições",
+      "alertMessageSecond": "Você será redirecionado para a página “Suas Aplicações” por não aceitar os Termos e Condições",
+      "alertMessageThird": "Você será redirecionado para a página “Visualização” por não aceitar os Termos e Condições"
+    },
+    "validation": {
+      "DOB_validation": "Informe uma data de nascimento ou idade válida",
+      "requiredMessage": "é obrigatório",
+      "InvalidMessage": "é inválido"
+    }
+  },
+  "documents": {
+    "title_document": "Enviar Documentos",
+    "text_filetype": "Tipo de arquivo permitido ",
+    "text_filesize": "e tamanho máximo permitido",
+    "action_browse": "PROCURAR",
+    "action_back": "VOLTAR",
+    "action_skip": "PULAR",
+    "action_continue": "CONTINUAR",
+    "label_sameas": "Mesmo que",
+    "text_or": "OU",
+    "action_view": "visualizar",
+    "OR": "OU",
+    "text_docrefid": "ID de Referência do Documento",
+    "sameAs": "Mesmo que",
+    "sameAsNone": "Nenhum"
+  },
+  "acknowledgement": {
+    "title": "Atendimento Confirmado",
+    "message": "O ID da Aplicação e os detalhes do atendimento foram enviados para o e-mail e número de telefone cadastrados",
+    "label_name": "Nome",
+    "label_pre_id": "ID da Aplicação",
+    "label_reg_cntr": "Nome do Centro",
+    "label_cntr_contact_number": "Número de Contato do Centro",
+    "label_appointment_date_time": "Data e Horário do Atendimento",
+    "container_guideline": "Orientações Importantes",
+    "action_send": "ENVIAR E-MAIL/SMS",
+    "action_download": "BAIXAR PDF",
+    "action_print": "IMPRIMIR",
+    "label_reg_cntr_dtl": "Endereço do Centro"
+  },
+  "preview": {
+    "title_preview": "Visualização",
+    "language": "Inglês",
+    "subheading_information": "Informações Pessoais",
+    "label_name": "Nome Completo",
+    "label_age": "Idade",
+    "label_DOB": "Data de Nascimento",
+    "text_years": "Anos",
+    "text_gender": "Gênero",
+    "text_resident_status": "Status de Residência",
+    "subheading_contact": "Dados de Contato",
+    "label_address": "Endereço",
+    "label_region": "Região",
+    "label_province": "Província",
+    "label_city": "Cidade",
+    "label_zone": "Zona",
+    "label_mob_num": "Número de Telefone Celular",
+    "label_alt_mob_num": "Número de Telefone Celular Alternativo",
+    "label_email_id": "E-mail",
+    "label_pin": "Número de Identidade de Referência",
+    "title_document": "Documentos Enviados",
+    "text_not_uploaded": "Não Enviado",
+    "action_modify": "modificar",
+    "action_back": "VOLTAR",
+    "action_add_applicant": "ADICIONAR SOLICITANTE",
+    "action_continue": "CONTINUAR"
+  },
+  "message": {
+    "login": {
+      "msg1": "O endereço de e-mail não é válido",
+      "msg2": "O número de telefone não é válido",
+      "msg3": "O OTP informado não é válido",
+      "msg4": "Login realizado com sucesso"
+    },
+    "demographicDetails": {
+      "msg1": "Palavra não permitida informada"
+    },
+    "uploadDocuments": {
+      "msg1": "O documento excede o tamanho permitido",
+      "msg2": "Falha na verificação de vírus",
+      "msg3": "Tipo de arquivo não suportado",
+      "msg4": "O arquivo é muito grande",
+      "msg5": "O nome do arquivo não deve exceder 50 caracteres",
+      "msg6": "Tipo de arquivo incorreto, envie novamente",
+      "msg7": "Não foi possível enviar o arquivo. Tente novamente.",
+      "msg8": "Não foi possível copiar o documento",
+      "msg9": "Documentos ausentes",
+      "msg10": "O arquivo não pôde ser excluído. Tente novamente.",
+      "msg11": "Confirme se deseja excluir o arquivo ",
+      "msg12": "Informe apenas texto ou números",
+      "msg13": "Informe no máximo 50 caracteres",
+      "msg14": "Arquivos protegidos por senha não são permitidos para envio",
+      "title_confirm": "Excluir",
+      "button_cancel": "Cancelar",
+      "none": "Nenhum"
+    },
+    "appointmentCentreSearch": {
+      "msg1": "Nenhum resultado encontrado",
+      "msg2": "Localização não habilitada"
+    },
+    "bookAppointment": {
+      "msg1": "O seguinte usuário não selecionou nenhum horário",
+      "msg2": "(deve informar o nome do usuário) Deseja continuar com o agendamento?"
+    },
+    "cancelAppointment": {
+      "msg1": "O atendimento da aplicação selecionada será cancelado",
+      "msg2": "O atendimento da aplicação selecionada foi cancelado com sucesso"
+    }
+  },
+  "dashboard": {
+    "title": "Suas Aplicações",
+    "name": "Aplicação",
+    "action_modify_information": "Modificar Informações",
+    "action_modify_appointment": "Agendar/Modificar Atendimento",
+    "action_cre_application": "Criar Aplicação",
+    "action_lost_uin": "UIN Perdido",
+    "action_update_registration": "Atualizar Registro",
+    "card": {
+      "text_app_id": "ID da Aplicação",
+      "text_name": "Nome",
+      "text_type": "Tipo de Aplicação",
+      "text_appoinment_date": "Data do Atendimento",
+      "text_status": "Status",
+      "action_modify_information": "Modificar Informações",
+      "action_view_acknowledgement": "Visualizar Comprovante",
+      "action_view_information": "Visualizar Informações",
+      "data_capture_langs": "Idiomas de Captura de Dados"
+    },
+    "discard": {
+      "title_confirm": "Confirmar",
+      "title_success": "Sucesso",
+      "title_error": "Erro",
+      "cancelAppointment": {
+        "msg_confirm": "O atendimento da aplicação selecionada será cancelado.",
+        "msg_deleted": "O atendimento da aplicação selecionada foi cancelado com sucesso.",
+        "msg_could_not_deleted": "Não foi possível cancelar o atendimento da aplicação selecionada"
+      },
+      "deletePreregistration": {
+        "msg_confirm": "A aplicação selecionada será excluída. Por favor, confirme.",
+        "msg_deleted": "A aplicação selecionada foi excluída com sucesso",
+        "msg_could_not_deleted": "Não foi possível excluir a aplicação selecionada"
+      },
+      "button_confirm": "Confirmar",
+      "button_cancel": "Cancelar"
+    },
+    "status": {
+      "pendingAppointment": "Atendimento Pendente",
+      "booked": "Agendado",
+      "expired": "Expirado",
+      "cancelled": "Cancelado",
+      "Application_Incomplete": "Aplicação Incompleta",
+      "prefetched": "Pré-carregada"
+    },
+    "error": {
+      "error": "Erro interno do servidor. Tente novamente após algum tempo.",
+      "button_ok": "OK"
+    },
+    "dataCaptureLanguage": {
+      "title": "Selecionar Idioma",
+      "message": [
+        "Por favor, selecione",
+        "Você pode selecionar no mínimo",
+        "e no máximo",
+        "idiomas para entrada de dados.",
+        "é obrigatório para o residente conforme as diretrizes governamentais.",
+        "A ordem de seleção definirá a visualização da página para os dados demográficos."
+      ],
+      "error_text": ["Você pode selecionar no máximo ", "idiomas para entrada de dados."],
+      "cancel_btn": "Cancelar",
+      "submit_btn": "Enviar"
+    }
+  },
+  "timeSelection": {
+    "title_book": "Agendar Atendimento",
+    "text_prev": "Anterior",
+    "text_next": "Próximo",
+    "text_morning": "Manhã",
+    "text_afternoon": "Tarde",
+    "text_available": "Solicitantes Disponíveis",
+    "text_selected": "Solicitantes Selecionados",
+    "text_availability": "Atendimentos Disponíveis",
+    "text_slots": "horários",
+    "action_done": "CONCLUÍDO",
+    "action_back": "Voltar",
+    "action_bookLater": "Agendar Depois",
+    "action_continue": "Continuar",
+    "note_text": "Observe que os dados da aplicação não poderão ser modificados após o agendamento do atendimento.",
+    "booking": {
+      "title_success": "Sucesso",
+      "msg_success": "O atendimento foi agendado com sucesso",
+      "title_failure": "Falha",
+      "msg_failure": "Falha ao agendar o atendimento",
+      "noSlotsSelectedForApplicant": "Nenhuma data ou horário foi selecionado para a aplicação",
+      "noApplicantSelected": "Nenhum solicitante foi selecionado para a aplicação",
+      "deletedApplicant1": [
+        "Você não selecionou nenhum horário para o seguinte usuário \r\n",
+        "Deseja continuar com o agendamento"
+      ],
+      "yesButtonText": "Sim",
+      "noButtonText": "Não",
+      "applicationLockConfirm": {
+        "title": "Confirmação",
+        "message": "Tem certeza de que deseja enviar os dados? Após o envio, os dados não poderão ser modificados",
+        "yesButtonText": "Confirmar",
+        "noButtonText": "Cancelar"
+      }
+    }
+  },
+  "appointmentCentreSearch": {
+    "title": "Agendar Atendimento",
+    "text_recommended_centres": "Centros Recomendados",
+    "text_finding_result": "encontrando resultado para",
+    "text_nearBy": "Próximos",
+    "action_back": "VOLTAR",
+    "action_bookLater": "AGENDAR DEPOIS",
+    "action_continue": "CONTINUAR"
+  },
+  "appointmentConfirmed": {
+    "title": "Atendimento Confirmado",
+    "text_confirmation": "O ID do Pré-Registro e os detalhes do atendimento foram enviados para o e-mail e número de telefone cadastrados",
+    "action_download": "BAIXAR",
+    "action_print": "IMPRIMIR"
+  },
+  "dialog": {
+    "title_applicant": "Enviar Confirmação de Atendimento",
+    "content_applicant": "Confirmação por E-mail / SMS",
+    "text_email": "Inserir e-mail",
+    "text_mobile": "Inserir número de telefone",
+    "invalidApplicantNumber": "Número de telefone inválido",
+    "invalidApplicantEmailId": "E-mail inválido",
+    "action_ok": "OK",
+    "title_discard": "Descartar",
+    "action_discard_app": "Descartar aplicação inteira",
+    "action_cancel": "Cancelar atendimento e salvar os detalhes",
+    "action_submit": "Enviar",
+    "action_dismiss": "OK",
+    "action_add": "Adicionar",
+    "action_close": "Fechar",
+    "action_add_to_slot": "Adicionar ao Horário",
+    "navigation_alert": "Existem alterações não salvas neste formulário que serão perdidas se você sair. Deseja continuar?"
+  },
+  "centerSelection": {
+    "title": " Agendar Atendimento ",
+    "action_nearBy": "Próximos",
+    "display_recommended": "Centros Recomendados",
+    "text_found": "Encontrados",
+    "text_centers": "centros.",
+    "use_search_option": "Utilize a opção de pesquisa para encontrar um centro.",
+    "text_timing": "Horário",
+    "text_open": "Aberto",
+    "text_select": "Selecionar Tipos de Local",
+    "text_enter": "Inserir",
+    "text_search": "Pesquisar....",
+    "action_back": "Voltar",
+    "action_book_later": "Agendar Depois",
+    "action_continue": "Continuar",
+    "noResult_found": "Nenhum resultado encontrado",
+    "lunch_hours": "Almoço"
+  },
+  "autologout": {
+    "preview": "Você será desconectado em 60 segundos devido à inatividade. Clique em qualquer lugar para reativar sua sessão.",
+    "post": "Você foi desconectado devido à inatividade."
+  },
+  "helpText": {
+    "applicationId": "ID da aplicação para o seu pré-registro",
+    "status": {
+      "pendingAppointment": "O atendimento ainda não foi agendado",
+      "booked": "O atendimento foi agendado com sucesso",
+      "expired": "A data do atendimento já passou",
+      "cancelled": "O atendimento foi cancelado",
+      "Application_Incomplete": "A aplicação está incompleta",
+      "prefetched": "A aplicação foi pré-carregada no Centro de Registro"
+    },
+    "deleteIcon": "Você pode descartar toda a aplicação ou cancelar o atendimento e salvar os detalhes.",
+    "book/modify_appointment": "Você deve marcar a caixa de seleção ao lado do ID de pré-registro de um ou mais solicitantes para agendar ou modificar o atendimento",
+    "bookAppointment": "Primeiro, selecione o horário de sua preferência e, em seguida, selecione o solicitante aplicável para o horário escolhido. Para múltiplas aplicações, repita o processo para os demais solicitantes.",
+    "send_email/sms": "Você pode adicionar destinatários adicionais para receber as notificações.",
+    "modify_at_DemoPreview": "Clique em modificar para corrigir os dados demográficos",
+    "modify_at_DocumentPreview": "Clique em modificar para corrigir o documento enviado",
+    "same_as": "Se o comprovante de endereço for o mesmo de um solicitante já cadastrado, você pode utilizar a opção Mesmo que",
+    "add_applicant": "Clique em Adicionar solicitante para incluir mais solicitantes.",
+    "recommended_centers": "Lista de centros recomendados conforme o seu código postal",
+    "nearBy": "Centros de registro com base em sua localização geográfica",
+    "magnifying_glass": "Pesquisar com base na seleção do menu suspenso.",
+    "preview_continue": "Envie todos os arquivos para prosseguir",
+    "lockIcon": "Os dados da aplicação não podem ser modificados após o atendimento ser Agendado, Cancelado ou Expirado",
+    "prefetchedLockIcon": "Os dados da aplicação não podem ser modificados após serem pré-carregados no Centro de Registro"
+  },
+  "error": {
+    "error": "Ocorreu um erro técnico e a operação não pôde ser concluída. Os dados informados podem não ter sido salvos.",
+    "contactInformation": [
+      "\n \nPor favor, entre em contato com o administrador do sistema pelo e-mail:",
+      " e número de contato: ",
+      "\n\n Código do Erro: "
+    ],
+    "sessionInvalidLogout": "Sua sessão expirou. Por favor, faça login novamente.",
+    "button_ok": "OK",
+    "postalCode": "O PIN informado é inválido",
+    "email": "O e-mail informado é inválido",
+    "phone": "O telefone informado é inválido",
+    "dateOfBirth": "A data de nascimento informada é inválida",
+    "referenceIdentityNumber": "O Número de Identidade de Referência informado é inválido",
+    "tokenExpiredLogout": "Você foi desconectado devido à inatividade.",
+    "slotNotAvailable": "O agendamento ou reagendamento não pode ser realizado porque o horário solicitado não está disponível. Selecione outro horário ou tente novamente mais tarde",
+    "timeExpired_1": "O atendimento não pode ser reagendado dentro de ",
+    "timeExpired_2": " horas após o agendamento",
+    "errorLabel": "ERRO",
+    "regCenterNotavailabe": "O centro de registro não está disponível.",
+    "centerDetailsNotAvailable": "Nenhum horário disponível. O agendamento ou reagendamento não pode ser realizado. Tente novamente mais tarde.",
+    "fileUploadDeactivateMsg": "Por favor, envie o documento obrigatório para continuar."
+  },
+  "residentTypesMapping": {
+    "NFR": "Nacional",
+    "FR": "Estrangeiro"
+  },
+  "sameAs": "Documento enviado utilizando a opção Mesmo que",
+  "DAYS": [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado"
+  ],
+  
+  "recaptcha": {
+    "errorMessage": "Falha na verificação do reCAPTCHA. Tente novamente"
+  },
+  "API_ERROR_CODES": {
+    "PRG_MSD_APP_001": "Falha ao buscar informações de dados mestres",
+    "KER-MSD-046": "Modelo não encontrado",
+    "KER-MSD-026": "Localização não encontrada",
+    "KER-IOV-004": "Parâmetro de entrada inválido - identidade/status de residência",
+    "KER-MSD-150": "Mapeamento de Categoria de Documento - Tipo de Documento não encontrado",
+    "KER-MSD-042": "Centro de registro não encontrado",
+    "PRG_PAM_LGN_001": "Falha ao enviar OTP pelo canal especificado",
+    "PRG_PAM_LGN_002": "Falha na autenticação",
+    "PRG_PAM_LGN_003": "Falha ao invalidar o token de autenticação",
+    "PRG_PAM_LGN_004": "ID de solicitação inválido recebido",
+    "PRG_PAM_LGN_005": "Versão da solicitação inválida recebida",
+    "PRG_PAM_LGN_006": "Carimbo de data/hora da solicitação inválido recebido",
+    "PRG_PAM_LGN_007": "Solicitação inválida recebida",
+    "PRG_PAM_LGN_008": "ID de usuário inválido recebido",
+    "PRG_PAM_LGN_009": "Código de idioma da solicitação inválido recebido",
+    "PRG_PAM_LGN_010": "OTP informado não é válido",
+    "PRG_PAM_LGN_011": "Erro ao analisar a resposta do kernel",
+    "PRG_PAM_LGN_012": "Arquivo de configuração não encontrado no servidor de configuração",
+    "PRG_PAM_LGN_013": "OTP informado não é válido",
+    "PRG_PAM_LGN_014": "Propriedades de idioma MOSIP não definidas",
+    "PRG_PAM_LGN_015": "Propriedades de idioma MOSIP não definidas",
+    "PRE-REG-OTP-101": "Número excessivo de solicitações de OTP recebidas",
+    "PRE-REG-OTP-401": "Não foi possível gerar ou enviar o OTP",
+    "PRE-REG-OTP-402": "Gere o OTP novamente e tente mais tarde",
+    "PRE-REG-OTP-403": "OTP inválido. Informe o valor correto",
+    "PRE-REG-OTP-404": "Parâmetro de entrada inválido - %s",
+    "PRE-REG-OTP-405": "Parâmetro de entrada ausente - %s",
+    "PRE-REG-OTP-406": "Falha na validação dos dados de entrada",
+    "PRE-REG-OTP-407": "Falha na geração do token",
+    "PRE-REG-OTP-408": "O OTP já foi gerado e enviado para o e-mail ou telefone. Para gerar um novo OTP, tente novamente mais tarde",
+    "PRE-REG-OTP-409": "Número de tentativas de validação de OTP excedido. Gere um novo OTP e tente novamente mais tarde",
+    "PRG_PAM_APP_001": "Falha ao criar o pré-registro com os dados demográficos fornecidos",
+    "PRG_PAM_APP_002": "Não foi possível acessar a tabela de pré-registro",
+    "PRG_PAM_APP_003": "Operação de exclusão não permitida",
+    "PRG_PAM_APP_004": "Falha ao excluir os dados de pré-registro",
+    "PRG_PAM_APP_005": "Nenhum dado encontrado para o ID de pré-registro solicitado",
+    "PRG_PAM_APP_006": "Código de status inválido",
+    "PRG_PAM_APP_007": "Falha na análise ou validação do JSON",
+    "PRG_PAM_APP_008": "Falha ao atualizar os detalhes da aplicação. Tente novamente mais tarde.",
+    "PRG_PAM_APP_009": "Exceção de E/S de arquivo ou codificação não suportada",
+    "PRG_PAM_APP_011": "Informe a data em um formato válido",
+    "PRG_PAM_APP_012": "Parâmetro da solicitação ausente",
+    "PRG_PAM_APP_013": "Nenhum registro encontrado",
+    "PRG_PAM_APP_014": "Falha na chamada do serviço de documentos",
+    "PRG_PAM_APP_015": "O tamanho da página deve ser maior que zero",
+    "PRG_PAM_APP_016": "Nenhum registro encontrado para o índice de página solicitado",
+    "PRG_PAM_APP_017": "O ID de pré-registro solicitado não pertence ao usuário",
+    "PRG_PAM_APP_018": "Falha ao ler o JSON de identidade do servidor",
+    "PRG_PAM_APP_019": "Valor de índice de página inválido",
+    "PRG_PAM_APP_020": "Falha na chamada REST para obter o PRID",
+    "PRG_PAM_APP_021": "Chave duplicada para PRID",
+    "PRG_PAM_APP_022": "Sua aplicação não pode ser modificada",
+    "PRG_PAM_DOC_001": "Falha na verificação de qualidade do documento",
+	"PRG_PAM_DOC_002": "Falha ao criptografar o documento",
+	"PRG_PAM_DOC_003": "Falha ao descriptografar o documento",
+	"PRG_PAM_DOC_004": "Envie o documento nos formatos: pdf, jpg",
+	"PRG_PAM_DOC_005": "Documento não encontrado para o ID de pré-registro de origem. Falha ao buscar no servidor do sistema de arquivos",
+	"PRG_PAM_DOC_006": "Falha ao excluir os documentos",
+	"PRG_PAM_DOC_007": "O documento enviado excede o limite de tamanho permitido. Envie um documento com tamanho inferior a $MB.",
+	"PRG_PAM_DOC_008": "Tipo de documento não suportado",
+	"PRG_PAM_DOC_009": "Falha no envio do documento",
+	"PRG_PAM_DOC_010": "Falha na verificação de vírus do documento",
+	"PRG_PAM_DOC_011": "Falha ao copiar o documento da origem para o destino",
+	"PRG_PAM_DOC_012": "Tabela de documentos inacessível",
+	"PRG_PAM_DOC_013": "Exceção de E/S do documento",
+	"PRG_PAM_DOC_014": "Campo obrigatório não encontrado",
+	"PRG_PAM_DOC_015": "Exceção de JSON",
+	"PRG_PAM_DOC_016": "Conexão CEPH inválida",
+	"PRG_PAM_DOC_017": "Conexão indisponível",
+	"PRG_PAM_DOC_018": "Parâmetro de solicitação inválido, ID de Pré-Registro inválido, código de status inválido, usuário de envio inválido, data e hora de atualização inválidas",
+	"PRG_PAM_DOC_019": "Dados demográficos não encontrados para o ID de Pré-Registro. Falha ao buscar o registro demográfico",
+	"PRG_PAM_DOC_021": "O documento já existe",
+	"PRG_PAM_DOC_022": "O ID do documento não pertence ao ID de pré-registro",
+	"PRG_PAM_DOC_024": "A tabela de documentos não pode ser atualizada com este status",
+	"PRG_PAM_DOC_025": "Arquivos protegidos por senha não são permitidos para envio",
+	"PRG_PAM_ACK_001": "Número de telefone ou e-mail ausente",
+	"PRG_PAM_ACK_002": "Campos obrigatórios ausentes",
+	"PRG_PAM_ACK_003": "Exceção de requisição HTTP JSON",
+	"PRG_PAM_ACK_004": "Não foi possível analisar o JSON",
+	"PRG_PAM_ACK_005": "EXCEÇÃO_DE_ENTRADA_SAÍDA",
+	"PRG_PAM_ACK_006": "O e-mail não é válido",
+	"PRG_PAM_ACK_007": "O número de telefone não é válido",
+	"PRG_PAM_ACK_008": "O nome completo não é válido",
+	"PRG_PAM_ACK_009": "A data do atendimento não é válida",
+	"PRG_PAM_ACK_010": "O horário do atendimento não é válido",
+	"PRG_PAM_ACK_011": "Falha na chamada REST dos dados demográficos",
+	"PRG_PAM_ACK_012": "Falha na chamada REST de agendamento",
+	"PRG_QRC_001": "Exceção de entrada e saída de arquivo",
+	"PRG_QRC_002": "Falha ao gerar o código QR",
+	"PRG_QRC_004": "Formato de horário da solicitação inválido",
+	"PRG_TRL_APP_001": "Falha na transliteração",
+	"PRG_TRL_APP_002": "Campos obrigatórios incorretos ou idioma não suportado",
+	"PRG_TRL_APP_004": "Solicitação JSON inválida",
+	"PRG_TRL_APP_005": "Tabela de transliteração do Pré-Registro inacessível",
+	"PRG_TRL_APP_006": "Falha ao analisar o JSON",
+	"PRG_APP_001": "Falha ao salvar a especificação da interface do usuário",
+	"PRG_APP_002": "Falha ao atualizar a especificação da interface do usuário",
+	"PRG_APP_003": "Falha ao buscar a especificação da interface do usuário",
+	"PRG_APP_004": "Falha ao excluir a especificação da interface do usuário",
+	"PRG_APP_005": "Falha ao publicar a especificação da interface do usuário",
+	"PRG_APP_006": "Erro ao analisar o JSON",
+	"PRG_APP_007": "Falha na auditoria",
+	"PRG_APP_015": "O ID da aplicação solicitado não pertence ao usuário",
+	"PRG_APP_016": "Tipo de agendamento inválido",
+	"PRG_DATA_SYNC_001": "Nenhum dado encontrado para o intervalo de datas solicitado",
+	"PRG_DATA_SYNC_005": "Não foi possível criar o arquivo ZIP",
+	"PRG_DATA_SYNC_006": "Não foi possível buscar o documento",
+	"PRG_DATA_SYNC_007": "Falha ao buscar o registro demográfico",
+	"PRG_DATA_SYNC_009": "ID do centro de registro inválido",
+	"PRG_DATA_SYNC_011": "IDs de pré-registro solicitados são inválidos",
+	"PRG_DATA_SYNC_012": "Falha ao armazenar o ID de pré-registro",
+	"PRG_DATA_SYNC_014": "Exceção de E/S de arquivo",
+	"PRG_DATA_SYNC_016": "Dados de agendamento não encontrados",
+	"PRG_DATA_SYNC_017": "Erro ocorrido ao analisar os dados",
+	"PRG_DATA_SYNC_018": "Falha ao buscar as informações do ID de pré-registro",
+	"PRG_DATA_SYNC_019": "Falha ao buscar a chave pública de criptografia das máquinas",
+	"PRG_PAM_CORE_001": "Parâmetro da solicitação ausente ou ID da solicitação inválido",
+	"PRG_PAM_CORE_002": "Versão da solicitação inválida",
+	"PRG_PAM_CORE_003": "Horário da solicitação inválido",
+	"PRG_PAM_CORE_004": "Corpo da solicitação inválido",
+	"PRG_PAM_CORE_010": "Falha no processo de hashing",
+	"PRG_CORE_REQ_013": "A data da solicitação deve ser a data atual",
+	"PRG_CORE_REQ_014": "Código de idioma inválido",
+	"PRG_CORE_REQ_015": "Entrada de solicitação inválida",
+	"PRG_CORE_REQ_016": "Erro interno do servidor",
+	"PRG_CORE_REQ_017": "Código da categoria do documento inválido",
+	"PRG_CORE_REQ_018": "Código da categoria do documento inválido + documento válido + código de idioma",
+	"PRG_CORE_REQ_019": "Informe a data no formato: dd/mm/aaaa",
+	"PRG_CORE_REQ_020": "A data inicial é maior que a data final",
+	"PRG_CORE_REQ_021": "Erro ao analisar a resposta do kernel",
+	"PRG_CORE_REQ_022": "Erro ao chamar os dados mestres",
+	"PRG_BOOK_RCI_002": "O agendamento ou reagendamento não pode ser realizado porque o horário solicitado não está disponível. Selecione outro horário ou tente novamente mais tarde",
+	"PRG_BOOK_RCI_003": "O usuário não selecionou nenhum horário",
+	"PRG_BOOK_RCI_006": "ID de pré-registro não informado",
+	"PRG_BOOK_RCI_007": "ID do centro de registro não informado",
+	"PRG_BOOK_RCI_008": "Data e horário do agendamento não selecionados",
+	"PRG_BOOK_RCI_015": "Nenhum horário disponível encontrado para o centro de registro especificado",
+	"PRG_BOOK_RCI_013": "Dados de agendamento não encontrados",
+	"PRG_BOOK_RCI_017": "Tabela de disponibilidade inacessível",
+	"PRG_BOOK_RCI_018": "Seu atendimento não pode ser cancelado. Descarte sua aplicação e crie uma nova.",
+	"PRG_BOOK_RCI_020": "Dados mestres não encontrados",
+	"PRG_BOOK_RCI_021": "A data do seu atendimento não pôde ser modificada. Tente novamente ou entre em contato com o administrador.",
+	"PRG_BOOK_RCI_024": "Falha ao atualizar a disponibilidade",
+	"PRG_BOOK_RCI_026": "Seu atendimento não pode ser cancelado. Descarte sua aplicação e crie uma nova.",
+	"PRG_BOOK_RCI_028": "Falha ao excluir o registro de pré-registro",
+	"PRG_BOOK_RCI_031": "Data e horário de agendamento inválidos",
+	"PRG_BOOK_RCI_032": "Registro não encontrado para o intervalo de datas e ID do centro de registro",
+	"PRG_BOOK_RCI_033": "Falha na chamada do serviço de notificação",
+	"PRG_BOOK_RCI_034": "Exceção de processamento JSON",
+	"PRG_BOOK_RCI_035": "ID do centro de registro não encontrado",
+	"PRG_BOOK_RCI_036": "Conclua sua aplicação antes de agendar o atendimento"
+  },
+  "UI_VALIDATION_ERROR_CODES": {
+    "UI_1000": "Somente letras são permitidas",
+    "UI_1001": "Informe entre 3 e 50 caracteres",
+    "UI_1003": "Informe valores iniciando com uma letra, seguidos de 6 dígitos e finalizando com uma letra",
+    "UI_1004": "Informe apenas números com 10 dígitos"
+  }
+}
