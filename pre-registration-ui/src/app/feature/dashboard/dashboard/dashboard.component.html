@@ -1,116 +1,118 @@
-<div [dir]="textDir" class="dashboard-body">
-  <!--  [dir]="textDir"-->
-  <div class="heading-row">
-    <div class="heading">
-      <p>{{ "dashboard.title" | translate }}</p>
+<div [dir]="textDir">
+  <section class="title-band">
+    <div class="wrap title-band-inner">
+      <div class="title-row">
+        <div class="title-icon"><app-icon name="folder" [size]="28"></app-icon></div>
+        <div class="title-text">
+          <h1>{{ "dashboard.title" | translate }}</h1>
+          <p>{{ "theme.appsSub" | translate }}</p>
+        </div>
+      </div>
     </div>
-    <span class="spacer"></span>
-    <div class="buttons">
-      <span
-        matTooltip="{{ 'helpText.book/modify_appointment' | translate }}"
-        [matTooltipDisabled]="!disableModifyAppointmentButton"
-      >
-        <!-- class="modify-app-btn" -->
-        <!-- mat-button -->
-        <button
-          style="margin-left: 20px"
-          [disabled]="disableModifyAppointmentButton"
-          class="btn_axn-sec page_btn mar_right-30"
-          (click)="onModifyMultipleAppointment()"
-        >
-          <img
-            src="assets\Book_Modify Appointment.png"
-            class="modify-app-img"
-            alt="Modify appointment"
-          />
-          {{ "dashboard.action_modify_appointment" | translate }}
-        </button></span
-      >
-      <span>
-        <!-- class="create-app-btn" -->
-        <button class="btn_axn-pri page_btn" (click)="onNewApplication()">
-          <img src="assets\Create new application.png" alt="New application" class="create-app-img" />
-          {{ "dashboard.action_cre_application" | translate }}
-        </button></span
-      >
-    </div>
-  </div>
-  <div class="spinner" *ngIf="!isFetched">
-    <mat-spinner></mat-spinner>
-  </div>
-  <div *ngIf="!isNewApplication && isFetched">
-    <div class="card-container">
-      <div class="card-component" *ngFor="let user of users">
-        <mat-card>
-          <div class="card-header">
-            <span class="checkbox"
-              ><mat-checkbox
-                *ngIf="user.status !== appStatusCodes.incomplete && user.status !== appStatusCodes.prefetched"
-                (change)="onSelectUser(user, $event)"
-              >
-              </mat-checkbox
-            ></span>
-            <span class="checkbox"
-              >{{
-                "dashboard.card.text_app_id" | translate
-              }}&nbsp;&nbsp;<strong> {{ user.applicationID }}</strong>
-              <!-- <mat-icon
-                class="icon"
-                matTooltip="{{ 'helpText.applicationId' | translate }}"
-                [inline]="true"
-                >help_outline</mat-icon
-              > -->
-            </span>
-            <span class="spacer"></span>
+  </section>
+
+  <div class="wrap page-pad">
+    <div class="card">
+      <div class="card-pad">
+        <div class="content-head">
+          <div>
+            <h2>{{ "dashboard.title" | translate }}</h2>
+          </div>
+          <div class="actions-group">
             <span
-              *ngIf="
-                !(
-                  user.status === appStatusCodes.pending ||
-                  user.status === appStatusCodes.incomplete
-                )
-              "
-              ><img
-                matTooltip="{{ user.status === appStatusCodes.prefetched ? ('helpText.prefetchedLockIcon' | translate) : ('helpText.lockIcon' | translate) }}"
-                [matTooltipDisabled]="false"
-                src="assets\lock.png"
-                class="lock-img"
-                alt="Lock"
-            /></span>
-            <button
-              (click)="onDelete(user)"
-              mat-icon-button
-              *ngIf="!(user.status === appStatusCodes.expired)"
+              matTooltip="{{ 'helpText.book/modify_appointment' | translate }}"
+              [matTooltipDisabled]="!disableModifyAppointmentButton"
             >
-              <img
-                matTooltip="{{ 'helpText.deleteIcon' | translate }}"
-                [matTooltipDisabled]="false"
-                src="assets\delete.png"
-                class="delete-img"
-                alt="Delete"
-              />
+              <button
+                type="button"
+                class="btn btn-outline"
+                [disabled]="disableModifyAppointmentButton"
+                (click)="onModifyMultipleAppointment()"
+              >
+                <app-icon name="calendar-change" [size]="20"></app-icon>
+                {{ "dashboard.action_modify_appointment" | translate }}
+              </button>
+            </span>
+            <button type="button" class="btn btn-primary" (click)="onNewApplication()">
+              <app-icon name="plus" [size]="20"></app-icon>
+              {{ "dashboard.action_cre_application" | translate }}
             </button>
           </div>
-          <mat-card-content [ngStyle]="{ marginTop: getMargin(user.name) }">
-            <div class="card-content">
-              <table>
-                <caption>{{'dashboard.name' | translate}}</caption>
-                <tr>
-                  <td class="column1">{{ "dashboard.card.text_name" | translate }}</td>
-                  <td
+        </div>
+
+        <div class="pr-spinner" *ngIf="!isFetched">
+          <mat-spinner [diameter]="48"></mat-spinner>
+        </div>
+
+        <div class="empty" *ngIf="isFetched && !isNewApplication && users.length === 0">
+          <span class="empty-icon"><app-icon name="file-text" [size]="36"></app-icon></span>
+          <h3>{{ "dashboard.title" | translate }}</h3>
+          <p class="muted">{{ "theme.appsSub" | translate }}</p>
+        </div>
+
+        <div class="table-wrap" *ngIf="!isNewApplication && isFetched && users.length > 0">
+          <table class="table">
+            <caption>{{ "dashboard.name" | translate }}</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="select-col"><span class="sr-only">{{ "dashboard.action_modify_appointment" | translate }}</span></th>
+                <th scope="col">{{ "dashboard.card.text_app_id" | translate }}</th>
+                <th scope="col">{{ "dashboard.card.text_name" | translate }}</th>
+                <th scope="col">{{ "dashboard.card.text_appoinment_date" | translate }}</th>
+                <th scope="col">{{ "dashboard.card.text_status" | translate }}</th>
+                <th scope="col" class="right"><span class="sr-only">{{ "dashboard.action_modify_information" | translate }}</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td class="select-col" [attr.data-label]="'dashboard.action_modify_appointment' | translate">
+                  <mat-checkbox
+                    *ngIf="user.status !== appStatusCodes.incomplete && user.status !== appStatusCodes.prefetched"
+                    (change)="onSelectUser(user, $event)"
+                  ></mat-checkbox>
+                </td>
+                <td class="mono" [attr.data-label]="'dashboard.card.text_app_id' | translate">
+                  <span class="id-cell">
+                    {{ user.applicationID }}
+                    <span
+                      *ngIf="!(user.status === appStatusCodes.pending || user.status === appStatusCodes.incomplete)"
+                      class="lock"
+                      matTooltip="{{ user.status === appStatusCodes.prefetched ? ('helpText.prefetchedLockIcon' | translate) : ('helpText.lockIcon' | translate) }}"
+                    ><app-icon name="lock" [size]="15"></app-icon></span>
+                  </span>
+                </td>
+                <td class="strong name-cell" [attr.data-label]="'dashboard.card.text_name' | translate">{{ user.name }}</td>
+                <td [attr.data-label]="'dashboard.card.text_appoinment_date' | translate">
+                  <strong *ngIf="user.appointmentDate && user.appointmentDate !== '-'">{{ user.appointmentDate }} · {{ user.appointmentTime }}</strong>
+                  <span *ngIf="!user.appointmentDate || user.appointmentDate === '-'" class="muted">—</span>
+                </td>
+                <td [attr.data-label]="'dashboard.card.text_status' | translate">
+                  <span
+                    class="status"
                     [ngClass]="
-                      user.name.length > 30
-                        ? 'application-value user__name--wordwrap'
-                        : 'application-value'
+                      user.status === appStatusCodes.booked
+                        ? 'status-booked'
+                        : user.status === appStatusCodes.pending
+                        ? 'status-pending'
+                        : user.status === appStatusCodes.expired || user.status === appStatusCodes.cancelled
+                        ? 'status-expired'
+                        : 'status-draft'
                     "
-                  >{{ user.name }}</td>
-                </tr>
-                <tr>
-                  <td class="column1">{{ "dashboard.card.text_appoinment_date" | translate }}</td>
-                  <td class="application-value">{{ user.appointmentTime }} {{ user.appointmentDate }}</td>
-                </tr>
-                <tr>
-                  <td class="column1">{{ "dashboard.card.text_status" | translate }}</td>
-                  <td class="application-value" [ngStyle]="{ color: getColor(user.status) }">
+                    matTooltip="{{
+                      (user.status === appStatusCodes.booked
+                        ? 'helpText.status.booked'
+                        : user.status === appStatusCodes.expired
+                        ? 'helpText.status.expired'
+                        : user.status === appStatusCodes.pending
+                        ? 'helpText.status.pendingAppointment'
+                        : user.status === appStatusCodes.cancelled
+                        ? 'helpText.status.cancelled'
+                        : user.status === appStatusCodes.incomplete
+                        ? 'helpText.status.Application_Incomplete'
+                        : 'helpText.status.prefetched'
+                      ) | translate
+                    }}"
+                  >
                     {{
                       (user.status === appStatusCodes.booked
                         ? "dashboard.status.booked"
@@ -125,95 +127,48 @@
                         : "dashboard.status.prefetched"
                       ) | translate
                     }}
-
-                    <mat-icon
-                      class="icon"
-                      matTooltip="{{
-                        (user.status === appStatusCodes.booked
-                          ? 'helpText.status.booked'
-                          : user.status === appStatusCodes.expired
-                          ? 'helpText.status.expired'
-                          : user.status === appStatusCodes.pending
-                          ? 'helpText.status.pendingAppointment'
-                          : user.status === appStatusCodes.cancelled
-                          ? 'helpText.status.cancelled'
-                          : user.status === appStatusCodes.incomplete
-                          ? 'helpText.status.Application_Incomplete'
-                          : 'helpText.status.prefetched'
-                        ) | translate
-                      }}"
-                      [inline]="true"
-                      >help_outline</mat-icon
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td class="column1">{{ "dashboard.card.data_capture_langs" | translate }}</td>
-                  <span *ngFor="let lang of user.dataCaptureLangs">
-                    <td class="application-value">{{lang}}</td>
                   </span>
-                </tr>
-              </table>
-            </div>
-          </mat-card-content>
-          <mat-card-footer>
-            <mat-card-actions>
-              <div class="card-content-footer">
-              <button
-                mat-button
-                class="footer-btn"
-                *ngIf="
-                  user.status === appStatusCodes.pending ||
-                  user.status === appStatusCodes.incomplete
-                "
-                [disabled]="disableModifyDataButton"
-                (click)="onModifyInformation(user)"
-              >
-                <img
-                  src="assets\Modify information_grey.png"
-                  class="modifyinfo-btn-img"
-                  alt="Modify information"
-                />&nbsp;{{ "dashboard.card.action_modify_information" | translate }}
-              </button>
-              <!-- (click)="onSelectUser(user)" -->
-              <button
-                mat-button
-                class="footer-btn"
-                *ngIf="
-                  !(user.status === appStatusCodes.pending ||
-                  user.status === appStatusCodes.incomplete)
-                "
-                (click)="onModifyInformation(user)"
-              >
-                <img
-                  src="assets\Modify information_grey.png"
-                  class="modifyinfo-btn-img"
-                  alt="Modify information"
-                />&nbsp;{{ "dashboard.card.action_view_information" | translate }}
-              </button>
-              <span class="spacer"></span>
-              <button
-                mat-button
-                class="footer-btn"
-                (click)="onAcknowledgementView(user)"
-                [disabled]="
-                  user.status === appStatusCodes.pending ||
-                  user.status === appStatusCodes.cancelled ||
-                  user.status === appStatusCodes.incomplete||
-                  user.status === appStatusCodes.prefetched
-                "
-              >
-                <img src="assets\view.png" alt="View" class="modifyapp-btn-img" />&nbsp;{{
-                  "dashboard.card.action_view_acknowledgement" | translate
-                }}
-              </button>
-              <!-- <button mat-icon-button class="footer-download-btn">
-                <img src="assets\download.png" class="download-btn-img" />
-              </button> -->
-              </div>
-            </mat-card-actions>
-          </mat-card-footer>
-        </mat-card>
+                </td>
+                <td class="right">
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline"
+                      *ngIf="user.status === appStatusCodes.pending || user.status === appStatusCodes.incomplete"
+                      [disabled]="disableModifyDataButton"
+                      (click)="onModifyInformation(user)"
+                    >
+                      <app-icon name="pencil" [size]="16"></app-icon>{{ "dashboard.card.action_modify_information" | translate }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline"
+                      (click)="onAcknowledgementView(user)"
+                      [disabled]="
+                        user.status === appStatusCodes.pending ||
+                        user.status === appStatusCodes.cancelled ||
+                        user.status === appStatusCodes.incomplete ||
+                        user.status === appStatusCodes.prefetched
+                      "
+                    >
+                      <app-icon name="file-text" [size]="16"></app-icon>{{ "dashboard.card.action_view_acknowledgement" | translate }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-ghost danger"
+                      *ngIf="!(user.status === appStatusCodes.expired)"
+                      (click)="onDelete(user)"
+                      matTooltip="{{ 'helpText.deleteIcon' | translate }}"
+                      [attr.aria-label]="'helpText.deleteIcon' | translate"
+                    >
+                      <app-icon name="trash" [size]="18"></app-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

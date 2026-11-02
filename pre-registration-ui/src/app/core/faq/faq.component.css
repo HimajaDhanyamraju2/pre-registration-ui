@@ -1,27 +1,81 @@
-.breadcrumb {
-    margin-top: 5px;
-    font-size: 12px;
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-
-.header-container {
-    display: flex;
+.faq ::ng-deep .mat-accordion .faq-item.mat-expansion-panel {
+  margin: 0;
+  border: 1px solid #e3e7ec;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
-
-.spacer {
-    flex: 1 1 auto;
+.faq ::ng-deep .faq-item.mat-expanded {
+  border-color: var(--green-border);
+  box-shadow: 0 0 0 3px var(--green-light) !important;
+}
+/* question row: white when closed, light green when open */
+.faq ::ng-deep .faq-item .mat-expansion-panel-header {
+  background: #fff !important;
+  padding: 18px 22px !important;
+}
+.faq ::ng-deep .faq-item .mat-expansion-panel-header:hover {
+  background: var(--panel) !important;
+}
+.faq ::ng-deep .faq-item.mat-expanded .mat-expansion-panel-header {
+  background: var(--green-light) !important;
+}
+.faq ::ng-deep .faq-item .mat-expansion-panel-header-title {
+  margin: 0;
+}
+.faq ::ng-deep .faq-item .mat-expansion-indicator::after {
+  color: var(--green);
+}
+.faq ::ng-deep .faq-item .mat-expansion-panel-body {
+  padding: 18px 22px 22px !important;
+}
+.faq-q,
+.faq-a {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.faq-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.faq-badge-answer {
+  background: var(--green-light);
+  color: var(--green-dark);
+  border: 1px solid var(--green-border);
+}
+.faq-question {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.45;
+  color: var(--ink);
+  padding-top: 4px;
+}
+.faq-answer {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--body);
+  padding-top: 4px;
+}
+@media (max-width: 760px) {
+  .faq ::ng-deep .faq-item .mat-expansion-panel-header,
+  .faq ::ng-deep .faq-item .mat-expansion-panel-body {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
-
-.header-text {
-    color: #FD5D93;
-    font-weight: bold;
-    font-size: 20px;
-    margin-left: -117px;
-}
-
-.body-container {
-    margin: 30px 40px;
-}
-
-.text-direction {
-    direction: rtl;
 }

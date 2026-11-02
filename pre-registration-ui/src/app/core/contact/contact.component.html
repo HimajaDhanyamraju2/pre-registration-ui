@@ -1,1 +1,25 @@
-<p>Refer <a href="https://www.mosip.io/contact.php" target="_blank" rel="noopener">https://www.mosip.io/contact.php</a></p>
+<section class="title-band">
+  <div class="wrap title-band-inner">
+    <a *ngIf="isLoggedIn()" [routerLink]="dashboardLink" class="back-link">
+      <app-icon name="arrow-left" [size]="22"></app-icon>{{ 'theme.backApps' | translate }}
+    </a>
+    <a *ngIf="!isLoggedIn()" href="./" class="back-link">
+      <app-icon name="arrow-left" [size]="22"></app-icon>{{ 'theme.backLogin' | translate }}
+    </a>
+    <div class="title-row">
+      <div class="title-icon"><app-icon name="info" [size]="28"></app-icon></div>
+      <div class="title-text">
+        <h1>{{ 'header.link_contact' | translate }}</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap page-pad">
+  <div class="card card-pad stack-20">
+    <p class="muted">{{ 'theme.contactPlaceholder' | translate }}</p>
+    <div class="note-blue">
+      <app-icon name="fingerprint" [size]="22"></app-icon>{{ 'theme.bioNote' | translate }}
+    </div>
+  </div>
+</div>

@@ -1,91 +1,95 @@
-::ng-deep.mat-dialog-container {
-  display: block;
-  font-family: 'Roboto', sans-serif;
-  border-radius: 2px;
-  border-color: 1px solid #fd518c;
-  box-sizing: border-box;
-  outline: 0;
-  min-width: 100%;
-  height: 100%;
-}
-::ng-deep.mat-dialog-content {
-  padding: 5px 1.5rem 1.5rem 1.7rem;
-  min-width: 100%;
-  font-size: 0.9rem;
-  height: 100%;
-  overflow: auto;
-}
-
-.discardBody {
-  height: 100px;
-}
+/* container, title, content and actions are styled globally in src/theme.css */
 mat-form-field {
   width: 100%;
+}
+.discardBody {
+  height: 100px;
 }
 .table-container td {
   padding-right: 10px;
 }
 .consent-popup-title {
-  font-size: 1rem;
-  margin: 0px;
-  color: #fd518c;
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--green-dark);
 }
 .consent-popup-subtitle {
-  font-size: 0.8rem;
-  margin: 0px;
-  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 8px;
+  font-weight: 800;
+  color: var(--ink);
 }
-.checkbox-accept {
-  font-size: 0.8rem;
-  padding: 10px;
+.content-display-iniline-block {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.5;
 }
-
-/* consent story desgin css  */
-
 .error-dialog {
   margin-bottom: 15px;
-}
-:ng-deep .mat-form-field-invalid .mat-input-element {
-  caret-color: #ff0000;
-  color: #ff0000;
-}
-
-.mat-input-element {
-  padding: 5px !important;
 }
 .div-bottom-spacing {
   padding-bottom: 20px;
 }
-.content-display-iniline-block {
-  display: flex;
-  font-size: 0.8rem;
-  padding: 10px;
-}
-.mat-dialog-title {
-  color: #fd518c;
-  font-size: 16px;
-  text-transform: uppercase;
-  border-bottom: 1px solid #fd518c;
-}
-.btn-cancel {
-  cursor: pointer;
-  border-radius: 2px;
-  border: 1px solid #ff4081;
-  color: #ff4081;
-  background-color: white;
-}
-.btn-submit {
-  cursor: pointer;
-  border-radius: 2px;
-  background-color: #ff4081;
-  border: none;
-  color: white;
-}
-.btn-submit-disabled {
-  border-radius: 2px;
-  color: white;
-  background-color: gray;
-}
 .spacer {
   flex: 1 1 auto;
+}
+.mat-radio-button {
+  margin: 4px 0;
+}
+section + section {
+  margin-top: 6px;
+}
+
+/* buttons, same as the prototype modal footer */
+.btn-cancel,
+.btn-submit,
+.btn-submit-disabled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  min-width: 120px;
+  padding: 0 22px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font);
+  text-transform: none;
+  line-height: 1;
+}
+.btn-cancel {
+  background: #fff;
+  border: 1.5px solid #cfd5dc;
+  color: var(--text);
+}
+.btn-cancel:hover {
+  border-color: var(--green);
+  color: var(--green-dark);
+}
+.btn-submit {
+  min-width: 140px;
+  background: linear-gradient(180deg, #078a45, #056b35);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(5, 107, 53, 0.25);
+}
+.btn-submit-disabled {
+  min-width: 140px;
+  background: #d9dde2;
+  border: 0;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+/* terms & conditions: the agree row like the prototype */
+.mat-dialog-actions .mat-checkbox {
+  margin-right: 6px;
+}
+.mat-dialog-actions:has(.mat-checkbox) {
+  background: var(--panel);
+  margin: 0 28px;
+  border: 0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  cursor: pointer;
 }

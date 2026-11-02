@@ -1,3 +1,17 @@
-<app-stepper [componentName]="componentName"></app-stepper>
-
-<router-outlet (activate)='onActivate($event)'></router-outlet>
+<section class="title-band">
+  <div class="wrap title-band-inner">
+    <div class="title-row">
+      <div class="title-icon"><app-icon name="file-text" [size]="28"></app-icon></div>
+      <div class="title-text">
+        <h1>{{ 'theme.formTitle' | translate }}</h1>
+        <p>{{ 'theme.formSub' | translate }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wrap page-pad">
+  <div class="card flow-card">
+    <app-stepper [componentName]="componentName"></app-stepper>
+    <router-outlet (activate)='onActivate($event)'></router-outlet>
+  </div>
+</div>

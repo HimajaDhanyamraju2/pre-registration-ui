@@ -271,12 +271,12 @@
     ]
   },
   "header": {
-    "link_about": "PRIMEIROS PASSOS",
+    "link_about": "Primeiros passos",
     "link_faq": "FAQ",
-    "link_contact": "CONTATO",
+    "link_contact": "Contacto",
     "link_applications": "Suas Aplicações",
     "link_logout": "Sair",
-    "link_login": "ENTRAR"
+    "link_login": "Entrar"
   },
   "login": {
     "text": "Passos rápidos e fáceis",
@@ -831,5 +831,38 @@
     "UI_1001": "Informe entre 3 e 50 caracteres",
     "UI_1003": "Informe valores iniciando com uma letra, seguidos de 6 dígitos e finalizando com uma letra",
     "UI_1004": "Informe apenas números com 10 dígitos"
+  },
+  "theme": {
+      "portal": "Portal de Pré-registro",
+      "portalSub": "Identidade Nacional · São Tomé e Príncipe",
+      "step": "Passo",
+      "footerTag": "Faça o pré-registro da sua Identidade Nacional e marque o atendimento num centro de registo.",
+      "fQuick": "Ligações rápidas",
+      "fHelp": "Ajuda",
+      "fContact": "Contacte-nos",
+      "supportEmail": "[E-mail de apoio]",
+      "helpline": "[Número de apoio]",
+      "office": "[Morada]",
+      "rights": "Portal de Pré-registro · República Democrática de São Tomé e Príncipe",
+      "powered": "Desenvolvido com MOSIP",
+      "heroTitle": "Faça o pré-registro da sua Identidade Nacional",
+      "heroSub": "Preencha os seus dados e carregue os documentos online e depois dirija-se a um centro de registo no horário que lhe convier.",
+      "h1": "Introduza os seus dados em Inglês e Português",
+      "h2": "Carregue os documentos de apoio",
+      "h3": "Marque um centro e um horário",
+      "h4": "Receba o comprovativo com código QR",
+      "bioNote": "Os dados biométricos (impressões digitais, íris e fotografia) são recolhidos no centro de registo durante o atendimento.",
+      "formTitle": "Novo pré-registro",
+      "formSub": "Preencha os seus dados, carregue os documentos e marque um atendimento num centro de registo",
+      "appsSub": "Crie um novo pré-registro ou continue um existente.",
+      "dataEntry": "Introdução de dados",
+      "docPreview": "Pré-visualização do documento",
+      "noPreview": "Selecione Ver num documento carregado para o pré-visualizar aqui.",
+      "field": "Campo",
+      "selApplicant": "Requerentes selecionados",
+      "ackGuidelines": "Orientações",
+      "backApps": "Voltar a Os meus pedidos",
+      "backLogin": "Voltar ao início de sessão",
+      "contactPlaceholder": "[Conteúdo a fornecer pela autoridade de registo]"
   }
 }

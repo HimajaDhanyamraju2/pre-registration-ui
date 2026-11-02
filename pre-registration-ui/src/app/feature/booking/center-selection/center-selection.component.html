@@ -1,226 +1,162 @@
-<div class="spinner" *ngIf="!isWorkingDaysAvailable">
-  <mat-spinner></mat-spinner>
+<div class="pr-spinner" *ngIf="!isWorkingDaysAvailable">
+  <mat-spinner [diameter]="48"></mat-spinner>
 </div>
-<div [dir]="textDir" class="center_selection-wrapper" *ngIf="isWorkingDaysAvailable">
-  <!-- Header -->
-  <mat-card class="center-selection__title-card">
-    <mat-card-header>
-      <p class="center__title-card-text">{{ 'centerSelection.title' | translate }}</p>
-    </mat-card-header>
-  </mat-card>
-  <!-- search container -->
-  <div class="container">
-    <div class="centers-wrapper">
-      <!-- search container -->
-      <div class="center_selection-intial-recommendation-container" *ngIf="searchClick; else elseBlock">
-        <div *ngIf="REGISTRATION_CENTRES" class="center_selection-center_recommendation-display">
-          <span (click)="getRecommendedCenters()"
-            ><b>{{ 'centerSelection.display_recommended' | translate }}</b
-            >&nbsp;&nbsp;
-            <mat-icon matTooltip="{{ 'helpText.recommended_centers' | translate }}" [inline]="true"
-              >help_outline</mat-icon
-            >
-            <div class="center_selection-center-available-text">
-              ( {{ 'centerSelection.text_found' | translate }} {{ REGISTRATION_CENTRES.length }}
-              {{ 'centerSelection.text_centers' | translate }} )
-            </div>
-          </span>
-          <button mat-button class="center_selection-nearby-btn" (click)="getLocation()">
-            {{ 'centerSelection.action_nearBy' | translate }} &nbsp;&nbsp;
-            <mat-icon matTooltip="{{ 'helpText.nearBy' | translate }}" [inline]="true">help_outline</mat-icon>
-          </button>
-          <span *ngIf="nearbyClicked">
-            <mat-icon (click)="resetPagination();setSearchClick(true);" class="name-delete-button">close</mat-icon>
-          </span>
-          <br />
-        </div>
-        <span class="spacer"></span>
-        <button
-          type="button"
-          matTooltip="{{ 'helpText.magnifying_glass' | translate }}"
-          mat-icon-button
-          class="search-btn"
-          (click)="setSearchClick(false)"
-        >
-          <img src="assets\search.png" alt="Search"/>
+<div [dir]="textDir" *ngIf="isWorkingDaysAvailable">
+  <div class="card-pad stack-24">
+    <div class="content-head">
+      <div>
+        <h2>{{ 'centerSelection.title' | translate }}</h2>
+      </div>
+    </div>
+
+    <div class="centre-toolbar">
+      <div class="tabs" role="tablist" *ngIf="searchClick; else searchForm">
+        <button type="button" role="tab" class="tab" [ngClass]="{ on: !nearbyClicked }" (click)="getRecommendedCenters()">
+          {{ 'centerSelection.display_recommended' | translate }}
+          <span *ngIf="REGISTRATION_CENTRES">({{ REGISTRATION_CENTRES.length }})</span>
+          <span class="help" matTooltip="{{ 'helpText.recommended_centers' | translate }}"><app-icon name="help-circle" [size]="16"></app-icon></span>
+        </button>
+        <button type="button" role="tab" class="tab" [ngClass]="{ on: nearbyClicked }" (click)="getLocation()">
+          <app-icon name="locate" [size]="17"></app-icon>{{ 'centerSelection.action_nearBy' | translate }}
+          <span class="help" matTooltip="{{ 'helpText.nearBy' | translate }}"><app-icon name="help-circle" [size]="16"></app-icon></span>
+        </button>
+        <button type="button" *ngIf="nearbyClicked" class="btn btn-sm btn-ghost" (click)="resetPagination();setSearchClick(true);" aria-label="Clear">
+          <app-icon name="x" [size]="18"></app-icon>
         </button>
       </div>
+      <button *ngIf="searchClick" type="button" class="btn btn-outline search-open" matTooltip="{{ 'helpText.magnifying_glass' | translate }}"
+        (click)="setSearchClick(false)">
+        <app-icon name="search" [size]="19"></app-icon>{{ 'centerSelection.text_search' | translate }}
+      </button>
 
-      <ng-template #elseBlock>
-        <div class="center_selection-form-container">
-          <form class="search-form">
-            <mat-card class="select-card" style="border-radius: 0 !important;">
-              <mat-select
-               style="font-size: 11.5px;"
-                disableOptionCentering
-                name="select"
-                class="select-input"
-                [(ngModel)]="locationType"
-                value="locationType"
-                (selectionChange)="onChangeLocationType()"
-                placeholder="{{ 'centerSelection.text_select' | translate }}"
-              >
-                <mat-option style="color:black;" *ngFor="let locationType of locationTypes" [value]="locationType">
-                  {{ locationType.hierarchyLevelName }}
-                </mat-option>
-              </mat-select>
-            </mat-card>
-            <mat-card class="search-card">
-              <input
-                *ngIf="locationType !== null"
-                mat-input
-                type="search"
-                placeholder="{{ 'centerSelection.text_enter' | translate }} {{ locationType.hierarchyLevelName }}"
-                name="search"
-                class="search-input"
-                [(ngModel)]="searchText"
-              />
-              <input
-                *ngIf="locationType === null"
-                mat-input
-                type="search"
-                placeholder="{{ 'centerSelection.text_search' | translate }}"
-                name="search"
-                class="search-input"
-                [(ngModel)]="searchText"
-              />
-              <button
-                matTooltip="{{ 'helpText.magnifying_glass' | translate }}"
-                mat-icon-button
-                type="submit"
-                (click)="showResults()"
-              >
-                <img src="assets\search_grey.png" alt="Search"/>
-              </button>
-              <button mat-icon-button class="search-cancel-btn" type="button" (click)="setSearchClick(true);resetPagination();">
-                <img src="assets\close.png" alt="Close"/>
-              </button>
-            </mat-card>
-          </form>
-        </div>
-        <span class="search-text" *ngIf="searchTextFlag">{{ displayMessage }}</span>
+      <ng-template #searchForm>
+        <form class="search-form">
+          <mat-form-field appearance="legacy" floatLabel="never" class="type-select">
+            <mat-select
+              disableOptionCentering
+              name="select"
+              [(ngModel)]="locationType"
+              value="locationType"
+              (selectionChange)="onChangeLocationType()"
+              placeholder="{{ 'centerSelection.text_select' | translate }}"
+            >
+              <mat-option *ngFor="let locationType of locationTypes" [value]="locationType">
+                {{ locationType.hierarchyLevelName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="input search">
+            <app-icon name="search" [size]="19" color="var(--muted)"></app-icon>
+            <input
+              *ngIf="locationType !== null"
+              type="search"
+              placeholder="{{ 'centerSelection.text_enter' | translate }} {{ locationType.hierarchyLevelName }}"
+              name="search"
+              [(ngModel)]="searchText"
+            />
+            <input
+              *ngIf="locationType === null"
+              type="search"
+              placeholder="{{ 'centerSelection.text_search' | translate }}"
+              name="search"
+              [(ngModel)]="searchText"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-search" matTooltip="{{ 'helpText.magnifying_glass' | translate }}" (click)="showResults()">
+            <app-icon name="search" [size]="19"></app-icon>{{ 'centerSelection.text_search' | translate }}
+          </button>
+          <button type="button" class="btn btn-ghost" (click)="setSearchClick(true);resetPagination();" aria-label="Close">
+            <app-icon name="x" [size]="20"></app-icon>
+          </button>
+        </form>
       </ng-template>
+    </div>
+    <span class="muted small" *ngIf="searchTextFlag && !searchClick">{{ displayMessage }}</span>
 
-      <div class="centers-list" *ngIf="REGISTRATION_CENTRES">
-        <span
-          *ngIf="!showMessage && !searchClick && REGISTRATION_CENTRES.length !== 0"
-          style="margin-left:24px;"
-          class="center_selection-center-available-text"
-        >
+    <div class="centre-layout">
+      <div class="centre-list" *ngIf="REGISTRATION_CENTRES" role="radiogroup">
+        <span class="muted small strong" *ngIf="searchClick">
+          {{ 'centerSelection.text_found' | translate }} {{ REGISTRATION_CENTRES.length }} {{ 'centerSelection.text_centers' | translate }}
+        </span>
+        <span *ngIf="!showMessage && !searchClick && REGISTRATION_CENTRES.length !== 0" class="muted small strong">
           {{ 'centerSelection.text_found' | translate }}
-          {{ REGISTRATION_CENTRES.length > this.totalItems ? REGISTRATION_CENTRES.length: this.totalItems }}
+          {{ REGISTRATION_CENTRES.length > this.totalItems ? REGISTRATION_CENTRES.length : this.totalItems }}
           {{ 'centerSelection.text_centers' | translate }}
         </span>
-        <span
-          *ngIf="showMessage  && REGISTRATION_CENTRES.length === 0"
-          style="margin-left:24px;"
-          class="center_selection-center-available-text"
-        >
+        <div *ngIf="showMessage && REGISTRATION_CENTRES.length === 0" class="pv-empty small">
           {{ 'centerSelection.noResult_found' | translate }}
-        </span>
-        <ul>
-          <li *ngFor="let center of REGISTRATION_CENTRES; let i = index">
-            <mat-card [ngClass]="selectedCentre === center ? 'center-card center-card-selected' : 'center-card'">
-              <input
-                type="radio"
-                [value]="center"
-                [(ngModel)]="selectedCentre"
-                (click)="selectedRow(center)"
-                name="center"
-              />
-              <div>
-                <div class="inline-flex" [dir]="textDir">
-                  <div><img src="assets\address.png" alt="Address"/></div>
-                  <div>
-                    <strong>{{center.name}}</strong>
-                    <strong *ngIf="center.addressLine1 != null && center.addressLine1 != ''">
-                      {{ ', ' + center.addressLine1}}
-                    </strong>
-                    <strong *ngIf="center.addressLine2 != null && center.addressLine2 != ''">
-                      {{ ', ' + center.addressLine2}}
-                    </strong>
-                    <strong *ngIf="center.addressLine3 != null && center.addressLine3 != ''">
-                      {{ ', ' + center.addressLine3}}
-                    </strong>
-                  </div>
-                </div>
-                <div>
-                  <span><img src="assets\contact number.png" alt="Contact Number"/></span>
-                  <span  *ngIf="center.contactPerson !== ''">
-                    {{ center.contactPerson}}
-                  </span>
-                  <span  *ngIf="center.contactPerson !== '' && center.contactPhone !== ''">
-                    {{ ', ' +  center.contactPhone }}
-                  </span>
-                  <span  *ngIf="center.contactPerson == '' && center.contactPhone !== ''">
-                    {{ center.contactPhone }}
-                  </span>
-                </div>
-              </div>
-              <span class="spacer"></span>
-              <div>
-                <div >
-                  <span>
-                    <div [dir]="textDir">
-                      {{ 'centerSelection.text_timing' | translate }} :
-                      <span dir="ltr">
-                        {{
-                        showTime(center.centerStartTime.substring(0, 5), center.centerEndTime.substring(0, 5))
-                        }}
-                      </span>
-                    </div>
-                    <div [dir]="textDir">
-                      <span
-                        *ngIf="center.lunchStartTime !== null && center.lunchEndTime !== null && center.lunchStartTime !== center.lunchEndTime">
-                        {{ 'centerSelection.lunch_hours' | translate }}:
-                        <span dir="ltr">
-                          {{
-                          showTime(center.lunchStartTime.substring(0, 5),center.lunchEndTime.substring(0, 5))
-                          }}
-                        </span>
-                      </span>
-                  </div>
-                  </span>
-                </div>
-                <div [dir]="textDir">
-                  <span>{{ 'centerSelection.text_open' | translate }}: {{ center.workingDays }}</span>
-                </div>
-              </div>
-            </mat-card>
-          </li>
-        </ul>
-      </div>
-      <div  dir="ltr">
-      <span *ngIf="this.totalItems !== 0">
-        <mat-paginator 
-          [length]="this.totalItems"
-          [pageSize]="this.pageSize"
-          [pageSizeOptions]="this.pageSizeOptions"
-          (page)="showResults(pageEvent = $event)"
-          >
-        </mat-paginator>
-      </span>
-    </div>
-    </div>
+        </div>
 
-    <div class="map" *ngIf="showMap">
-      <app-map style="width:100%; height:35%;" [mapProvider]="mapProvider"></app-map>
+        <label *ngFor="let center of REGISTRATION_CENTRES; let i = index" class="centre-card" [ngClass]="{ on: selectedCentre === center }">
+          <input
+            type="radio"
+            [value]="center"
+            [(ngModel)]="selectedCentre"
+            (click)="selectedRow(center)"
+            name="center"
+          />
+          <span class="centre-main" [dir]="textDir">
+            <strong>{{ center.name }}</strong>
+            <span class="centre-line">
+              <app-icon name="map-pin" [size]="17" color="var(--green)"></app-icon>
+              <span>
+                <span *ngIf="center.addressLine1 != null && center.addressLine1 != ''">{{ center.addressLine1 }}</span>
+                <span *ngIf="center.addressLine2 != null && center.addressLine2 != ''">{{ ', ' + center.addressLine2 }}</span>
+                <span *ngIf="center.addressLine3 != null && center.addressLine3 != ''">{{ ', ' + center.addressLine3 }}</span>
+              </span>
+            </span>
+            <span class="centre-line" *ngIf="center.contactPerson !== '' || center.contactPhone !== ''">
+              <app-icon name="phone" [size]="16" color="var(--green)"></app-icon>
+              <span>
+                <span *ngIf="center.contactPerson !== ''">{{ center.contactPerson }}</span>
+                <span *ngIf="center.contactPerson !== '' && center.contactPhone !== ''">{{ ' · ' + center.contactPhone }}</span>
+                <span *ngIf="center.contactPerson == '' && center.contactPhone !== ''">{{ center.contactPhone }}</span>
+              </span>
+            </span>
+          </span>
+          <span class="centre-side" [dir]="textDir">
+            <span>
+              <b>{{ 'centerSelection.text_timing' | translate }}:</b>
+              <span dir="ltr"> {{ showTime(center.centerStartTime.substring(0, 5), center.centerEndTime.substring(0, 5)) }}</span>
+            </span>
+            <span *ngIf="center.lunchStartTime !== null && center.lunchEndTime !== null && center.lunchStartTime !== center.lunchEndTime">
+              <b>{{ 'centerSelection.lunch_hours' | translate }}:</b>
+              <span dir="ltr"> {{ showTime(center.lunchStartTime.substring(0, 5), center.lunchEndTime.substring(0, 5)) }}</span>
+            </span>
+            <span><b>{{ 'centerSelection.text_open' | translate }}:</b> {{ center.workingDays }}</span>
+          </span>
+        </label>
+
+        <div dir="ltr" *ngIf="this.totalItems !== 0">
+          <mat-paginator
+            [length]="this.totalItems"
+            [pageSize]="this.pageSize"
+            [pageSizeOptions]="this.pageSizeOptions"
+            (page)="showResults(pageEvent = $event)"
+          >
+          </mat-paginator>
+        </div>
+      </div>
+
+      <div class="map" *ngIf="showMap">
+        <app-map [mapProvider]="mapProvider"></app-map>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions" [dir]="textDir">
+    <div class="actions-group">
+      <button type="button" (click)="routeBack()" class="btn btn-outline">
+        <app-icon name="arrow-left" [size]="20"></app-icon>{{ 'centerSelection.action_back' | translate }}
+      </button>
+    </div>
+    <div class="actions-group">
+      <button type="button" (click)="routeDashboard()" class="btn btn-outline">
+        {{ 'centerSelection.action_book_later' | translate }}
+      </button>
+      <button type="button" (click)="routeNext()" [disabled]="selectedCentre === null" class="btn btn-primary">
+        {{ 'centerSelection.action_continue' | translate }}
+      </button>
     </div>
   </div>
 </div>
-  <!-- Footer navigation -->
-  <div [dir]="textDir" *ngIf="isWorkingDaysAvailable">
-    <mat-card class="center-selection__button-container">
-      <button (click)="routeBack()" class="user__btn user__btn-back">
-        {{ 'centerSelection.action_back' | translate }}
-      </button>
-      <span class="spacer"></span>
-      <button (click)="routeDashboard()" class="user__btn user__btn-action">
-        {{ 'centerSelection.action_book_later' | translate }}
-      </button>
-      <button (click)="routeNext()" [disabled]="selectedCentre === null" class="user__btn">
-        {{ 'centerSelection.action_continue' | translate }}
-      </button>
-    </mat-card>
-  </div>
-

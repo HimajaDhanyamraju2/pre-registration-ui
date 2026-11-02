@@ -68,7 +68,21 @@ export class LoginComponent implements OnInit {
     clearInterval(this.timer);
   }
 
-  //very imp to clear the timer func 
+  /**
+   * @description Indexes of the OTP digit boxes on the login card (display only),
+   * one per digit of the configured OTP length.
+   */
+  get otpBoxes(): number[] {
+    const otpLength =
+      Number(
+        this.configService.getConfigByKey(
+          appConstants.CONFIG_KEYS.mosip_kernel_otp_default_length
+        )
+      ) || 6;
+    return Array.from({ length: otpLength }, (_, i) => i);
+  }
+
+  //very imp to clear the timer func
   ngOnDestroy(){
     clearInterval(this.timer);
   }

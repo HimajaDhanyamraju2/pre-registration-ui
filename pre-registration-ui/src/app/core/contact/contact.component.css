@@ -1,0 +1,12 @@
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+  text-decoration: none;
+  align-self: flex-start;
+}
+.card p {
+  margin: 0;
+  font-size: 15px;
+}

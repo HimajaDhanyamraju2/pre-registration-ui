@@ -12,7 +12,7 @@
   }
 
 .header-text {
-    color: #FD5D93;
+    color: var(--green-dark);
     font-weight: bold;
     font-size: 20px;
     margin-left: -117px;
@@ -36,7 +36,7 @@
 }
 
 .pink-text {
-    color: #FD5D93;
+    color: var(--green-dark);
 }
 
 .white-text {
@@ -44,7 +44,7 @@
 }
 
 .active-panel {
-    background-color: #FD5D93;
+    background-color: var(--green-dark);
     color: white;
 }
 

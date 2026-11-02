@@ -1,115 +1,96 @@
-<div class="spinner" *ngIf="showSpinner">
-  <mat-spinner></mat-spinner>
+<div class="pr-spinner" *ngIf="showSpinner">
+  <mat-spinner [diameter]="48"></mat-spinner>
 </div>
-<div *ngIf="!showSpinner" class="wrapper">
-  <div class="spacer"></div>
-  <div id="print-section">
-  <div class="ack-container" *ngFor="let ackData of ackDataArr; index as i">
-    <div id="{{'pdf-section-' + ackData.preRegId}}">
-      <div class="print-section-inner-div" >
-        <div [id]="message-container" class="ack__message-container">
-          <p *ngFor="let ackMessage of ackData.messages">
-            <img style="vertical-align: middle;" src="assets/img/done.png" alt="Done"/>&nbsp;&nbsp;{{ackMessage.preRegId}} :
-            {{ackMessage.message}}
-          </p>
-        </div>
-        <div class="ack__header-container" [dir]="ackData.appLangCodeDir">
-          <table>
-            <caption>{{'quick_guide.Acknowledgement.tablename' | translate}}</caption>
-            <tr>
-              <td>{{ ackData.preRegIdLabels}} : </td>
-              <td><b>{{ ackData.preRegId}}</b></td>
-            </tr>
-            <tr>
-              <td>{{ ackData.appDateLabels }} : </td>
-              <td
-                *ngIf="ackData.bookingTimePrimary && ackData.bookingTimePrimary.length > 0 && ackData.bookingTimePrimary[0].langAvailable">
-                <span *ngFor="let bookingTime of ackData.bookingTimePrimary; index as i;">
-                  
-                  <b *ngIf="bookingTime.langCode == langCode">
-                    <span [dir]="ackData.appLangCodeDir">
-                      {{ ackData.bookingDataPrimary[i].date }}, {{ bookingTime.time }}
+<div *ngIf="!showSpinner" class="card-pad">
+  <div id="print-section" class="stack-28">
+    <div class="ack-container" *ngFor="let ackData of ackDataArr; index as i">
+      <div id="{{'pdf-section-' + ackData.preRegId}}" class="pdf-section">
+        <div class="print-section-inner-div stack-28">
+          <div [id]="message-container" class="stack-12">
+            <div class="banner banner-success" role="status" *ngFor="let ackMessage of ackData.messages">
+              <app-icon name="check-circle" [size]="26"></app-icon>
+              <span><b>{{ ackMessage.preRegId }}</b> · {{ ackMessage.message }}</span>
+            </div>
+          </div>
+
+          <div class="conf-layout" [dir]="ackData.appLangCodeDir">
+            <dl class="conf-list">
+              <div class="conf-row">
+                <dt>{{ ackData.preRegIdLabels }}</dt>
+                <dd class="prid">{{ ackData.preRegId }}</dd>
+              </div>
+              <div class="conf-row" *ngIf="ackData.regCntrNames">
+                <dt>{{ ackData.labelNames }}</dt>
+                <dd class="strong">{{ ackData.nameValues }}</dd>
+              </div>
+              <div class="conf-row">
+                <dt>{{ ackData.appDateLabels }}</dt>
+                <dd class="strong"
+                  *ngIf="ackData.bookingTimePrimary && ackData.bookingTimePrimary.length > 0 && ackData.bookingTimePrimary[0].langAvailable">
+                  <ng-container *ngFor="let bookingTime of ackData.bookingTimePrimary; index as i;">
+                    <span *ngIf="bookingTime.langCode == langCode" [dir]="ackData.appLangCodeDir">
+                      {{ ackData.bookingDataPrimary[i].date }} · {{ bookingTime.time }}
                     </span>
-                  </b>
-                </span>
-              </td>
-              <td
-                *ngIf="ackData.bookingTimePrimary && ackData.bookingTimePrimary.length > 0 && !ackData.bookingTimePrimary[0].langAvailable">
-                <b>
+                  </ng-container>
+                </dd>
+                <dd class="strong"
+                  *ngIf="ackData.bookingTimePrimary && ackData.bookingTimePrimary.length > 0 && !ackData.bookingTimePrimary[0].langAvailable">
                   <span [dir]="ackData.appLangCodeDir">
-                    {{ ackData.bookingDataPrimary[0].date }}, {{ ackData.bookingTimePrimary[0].time}}
+                    {{ ackData.bookingDataPrimary[0].date }} · {{ ackData.bookingTimePrimary[0].time }}
                   </span>
-                  </b>
-              </td>
-            </tr>
-            <tr>
-              <td>{{ ackData.contactPhoneLabels }} : </td>
-              <td><b>{{ ackData.contactPhone }}</b></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <div *ngIf="ackData.qrCodeBlob" id="qr-code-container" class="ack__qr-code">
-                  <img id="qr-code" src="data:image/png;base64,{{ ackData.qrCodeBlob }}" />
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div [dir]="ackData.appLangCodeDir">
-          <div id="body-container" *ngIf="ackData.regCntrNames" class="ack__body-container">
-            <table id="table-container">
-              <tr>
-                <td>{{ ackData.labelNames }} : </td>
-                <td><b>{{ ackData.nameValues }}</b></td>
-              </tr>
-              <tr>
-                <td>{{ ackData.labelRegCntrs }} : </td>
-                <td><b>{{ ackData.regCntrNames }}</b></td>
-              </tr>
-            </table>
+                </dd>
+              </div>
+              <div class="conf-row" *ngIf="ackData.regCntrNames">
+                <dt>{{ ackData.labelRegCntrs }}</dt>
+                <dd class="strong">{{ ackData.regCntrNames }}</dd>
+              </div>
+              <div class="conf-row">
+                <dt>{{ ackData.contactPhoneLabels }}</dt>
+                <dd>{{ ackData.contactPhone }}</dd>
+              </div>
+            </dl>
+            <div class="qr-box" *ngIf="ackData.qrCodeBlob">
+              <div id="qr-code-container" class="ack__qr-code">
+                <img id="qr-code" src="data:image/png;base64,{{ ackData.qrCodeBlob }}" [alt]="'QR ' + ackData.preRegId" width="170" height="170" />
+              </div>
+              <span class="muted small center mono">{{ ackData.preRegId }}</span>
+            </div>
+          </div>
+          <div id="guidelines-container" class="guide-box" [dir]="ackData.appLangCodeDir" *ngIf="guidelines.length !== 0">
+            <h3>{{ 'theme.ackGuidelines' | translate }}</h3>
+            <div *ngFor="let langCode of ackData.appLangCode" class="stack-12">
+              <!-- the guideline template carries its own numbering (1., 2.1 ...) and blank separator lines -->
+              <ul class="guide-lines">
+                <ng-container *ngFor="let guideline of ackData[langCode]">
+                  <li *ngIf="guideline && guideline.trim()">{{ guideline }}</li>
+                </ng-container>
+              </ul>
+            </div>
           </div>
         </div>
-        <div id="guidelines-container" class="ack__guidelines-container" [dir]="ackData.appLangCodeDir">
-          <span *ngFor="let langCode of ackData.appLangCode">
-            <div class="spacer"></div>
-            <table *ngIf="guidelines.length !== 0" class="ack__guidelines">
-              <tr *ngFor="let guideline of ackData[langCode]">
-                <td class="inner-guideline-content">{{ guideline }}</td>
-              </tr>
-            </table>
-            <p></p>
-          </span>
-          <p></p>
-        </div>
-        <!-- <div class="endOfAck" *ngIf="i + 1 !== ackDataArr.length"></div>
-        <div class="lastAck" *ngIf="i + 1 == ackDataArr.length"></div> -->
       </div>
     </div>
   </div>
-  </div>
 </div>
-<div *ngIf="!showSpinner">
-  <div class="ack__button-container">
-    <!-- <button mat-button (click)="navigateBack()" class="user-back-btn">{{'preview.action_back'| translate}}</button> -->
-    <!-- <span class="spacer"></span> -->
-    <button *ngIf=" notificationTypes && notificationTypes.length > 0 && notificationTypes[0] !== ''"
-      matTooltip="{{ 'helpText.send_email/sms' | translate }}" mat-button (click)="sendAcknowledgement()"
-      class="ack-book_later-btn">
-      {{ 'acknowledgement.action_send' | translate }}
+<div *ngIf="!showSpinner" class="actions">
+  <div class="actions-group">
+    <button type="button" *ngIf="notificationTypes && notificationTypes.length > 0 && notificationTypes[0] !== ''"
+      matTooltip="{{ 'helpText.send_email/sms' | translate }}" (click)="sendAcknowledgement()" class="btn btn-outline">
+      <app-icon name="mail" [size]="20"></app-icon>{{ 'acknowledgement.action_send' | translate }}
     </button>
-    <span class="spacer"></span>
-    <button mat-button (click)="download()" class="ack-book_later-btn">
-      {{ 'acknowledgement.action_download' | translate }}
-    </button>
-    <button mat-button [printStyle]="{
+  </div>
+  <div class="actions-group">
+    <button type="button" class="btn btn-outline" [printStyle]="{
         '#message-container': { display: 'none' },
         '#body-container': { display: 'flex', 'flex-wrap': 'wrap', width: '100%' },
         '#table-container table tr td': { padding: '10px' },
         '#print-section': { 'page-break-after': 'always' },
         '.print-section-inner-div': { 'page-break-after': 'always' }
-      }" printSectionId="print-section" ngxPrint class="ack-continue-btn">
-      {{ 'acknowledgement.action_print' | translate }}
+      }" printSectionId="print-section" ngxPrint>
+      <app-icon name="printer" [size]="20"></app-icon>{{ 'acknowledgement.action_print' | translate }}
+    </button>
+    <button type="button" (click)="download()" class="btn btn-primary">
+      <app-icon name="download" [size]="20"></app-icon>{{ 'acknowledgement.action_download' | translate }}
     </button>
   </div>
 </div>

@@ -1820,7 +1820,8 @@ export class DemographicComponent
             }  
           },
           (error) => {
-            //this.userForm.controls[toFieldName].patchValue(fromVal);
+            //no transliterator for the pair (e.g. eng-por, both Latin script): copy the value as is
+            this.userForm.controls[toFieldName].patchValue(fromVal);
             //no error handling required for failed transliteration
             //this.loggerService.error(error);
           }

@@ -806,5 +806,38 @@
 	"UI_VALIDATION_ERROR_CODES": {
 	  "UI_1000": "केवल अक्षरों की अनुमति है",
 	  "UI_1001": "कृपया ३ से ५० वर्णों के बीच दर्ज करें"
-	} 
+	},
+  "theme": {
+      "portal": "Pre-Registration Portal",
+      "portalSub": "National Identity · São Tomé and Príncipe",
+      "step": "Step",
+      "footerTag": "Pre-register for your National ID and book your appointment at a registration centre.",
+      "fQuick": "Quick Links",
+      "fHelp": "Help",
+      "fContact": "Contact Us",
+      "supportEmail": "[Support email]",
+      "helpline": "[Helpline number]",
+      "office": "[Office address]",
+      "rights": "Pre-Registration Portal · República Democrática de São Tomé e Príncipe",
+      "powered": "Powered by MOSIP",
+      "heroTitle": "Pre-register for your National ID",
+      "heroSub": "Fill in your details and upload documents online, then visit a registration centre at a time that suits you.",
+      "h1": "Enter your details in English and Português",
+      "h2": "Upload your supporting documents",
+      "h3": "Book a centre and time slot",
+      "h4": "Get your acknowledgement with QR code",
+      "bioNote": "Biometrics (fingerprints, iris and photo) are captured at the registration centre during your appointment.",
+      "formTitle": "New Pre-Registration",
+      "formSub": "Enter your details, upload documents and book an appointment at a registration centre",
+      "appsSub": "Create a new pre-registration or continue an existing one.",
+      "dataEntry": "Data entry",
+      "docPreview": "Document preview",
+      "noPreview": "Select View on an uploaded document to preview it here.",
+      "field": "Field",
+      "selApplicant": "Selected applicants",
+      "ackGuidelines": "Guidelines",
+      "backApps": "Back to My Applications",
+      "backLogin": "Back to Login",
+      "contactPlaceholder": "[Content to be provided by the registration authority]"
+  }
 }

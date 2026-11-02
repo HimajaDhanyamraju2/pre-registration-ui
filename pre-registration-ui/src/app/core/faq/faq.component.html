@@ -1,18 +1,36 @@
-<mat-card>
-  <div class="header-container">
-      <span class="breadcrumb">{{'faq.breadcrumb.home' | translate}}/<strong>{{'faq.breadcrumb.getting_started' | translate}}</strong></span>
-      <span class="spacer"></span>
-      <span class="header-text">{{'faq.breadcrumb.getting_started' | translate}}</span>
-      <span class="spacer"></span>
-  </div>
-</mat-card>
-
-<div [ngClass]="langCode === 'ara' ? 'body-container text-direction': 'body-container'">
-  <mat-card>
-    <div *ngFor="let item of data">
-      <p>{{item.question}}</p>
-      <p><b>{{answerTranslation}}:</b>&nbsp;&nbsp;&nbsp;{{item.answer}}</p>
-      <br />
+<div [dir]="langCode === 'ara' ? 'rtl' : 'ltr'">
+  <section class="title-band">
+    <div class="wrap title-band-inner">
+      <div class="title-row">
+        <div class="title-icon"><app-icon name="help-circle" [size]="28"></app-icon></div>
+        <div class="title-text">
+          <h1>{{ 'faq.breadcrumb.getting_started' | translate }}</h1>
+        </div>
+      </div>
     </div>
-  </mat-card>
+  </section>
+
+  <div class="wrap page-pad">
+    <div class="card card-pad faq">
+      <div class="pr-spinner" *ngIf="data.length === 0">
+        <mat-spinner [diameter]="40"></mat-spinner>
+      </div>
+      <mat-accordion class="faq-list" *ngIf="data.length > 0">
+        <mat-expansion-panel *ngFor="let item of data; let first = first; index as i" [expanded]="first" class="faq-item">
+          <mat-expansion-panel-header collapsedHeight="auto" expandedHeight="auto">
+            <mat-panel-title>
+              <span class="faq-q">
+                <span class="faq-badge">Q</span>
+                <span class="faq-question">{{ item.question }}</span>
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="faq-a">
+            <span class="faq-badge faq-badge-answer" [attr.title]="answerTranslation">A</span>
+            <p class="faq-answer"><span class="sr-only">{{ answerTranslation }}: </span>{{ item.answer }}</p>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
 </div>

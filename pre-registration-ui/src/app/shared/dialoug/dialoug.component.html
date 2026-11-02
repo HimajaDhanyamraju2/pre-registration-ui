@@ -101,11 +101,14 @@
           <h3 class="consent-popup-subtitle">
             {{ item.labels.consent.subtitle }}
           </h3>
-          <div>
-            <div *ngFor="let message of item.fileText">
-              <div>{{ message }}</div>
+          <!-- consent templates are HTML: render them (sanitized by Angular); plain text keeps one line per row -->
+          <div *ngIf="item.fileText && item.fileText.join('\n').indexOf('<') !== -1; else plainConsent"
+            class="consent-html" [innerHTML]="item.fileText.join('\n')"></div>
+          <ng-template #plainConsent>
+            <div class="consent-plain">
+              <div *ngFor="let message of item.fileText">{{ message }}</div>
             </div>
-          </div>
+          </ng-template>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

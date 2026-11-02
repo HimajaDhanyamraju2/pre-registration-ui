@@ -1,6 +1,37 @@
-<div class="main-footer">
-  <p>
-    <img src="assets\logo-final.png" alt="MOSIP logo" style="height:20px; vertical-align: middle;" /> <strong>&nbsp;&nbsp;Mosip.io</strong>
-    <span class="version-txt"><strong>Pre-registration UI verison: {{appVersion}}</strong></span>
-  </p>
-</div>
+<footer class="site-footer">
+  <div class="tricolor" aria-hidden="true">
+    <span class="t-green"></span><span class="t-yellow"></span><span class="t-black"></span><span class="t-red"></span>
+  </div>
+  <div class="footer-grid wrap">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <span class="footer-logo"><img src="assets/stp-logo.png" alt="" /></span>
+        <span>{{ 'theme.portal' | translate }}</span>
+      </div>
+      <p>{{ 'theme.footerTag' | translate }}</p>
+    </div>
+    <div class="footer-col">
+      <h2>{{ 'theme.fQuick' | translate }}</h2>
+      <a class="footer-link" routerLink="/about-us">{{ 'header.link_about' | translate }}</a>
+      <a class="footer-link" routerLink="/faq">{{ 'header.link_faq' | translate }}</a>
+      <a class="footer-link" routerLink="/contact">{{ 'header.link_contact' | translate }}</a>
+    </div>
+    <div class="footer-col">
+      <h2>{{ 'theme.fHelp' | translate }}</h2>
+      <a class="footer-link" routerLink="/faq">{{ 'header.link_faq' | translate }}</a>
+      <a class="footer-link" routerLink="/contact">{{ 'header.link_contact' | translate }}</a>
+    </div>
+    <div class="footer-col">
+      <h2>{{ 'theme.fContact' | translate }}</h2>
+      <span class="footer-row"><app-icon name="mail" [size]="18" color="#9fd3b2"></app-icon>{{ 'theme.supportEmail' | translate }}</span>
+      <span class="footer-row"><app-icon name="phone" [size]="18" color="#9fd3b2"></app-icon>{{ 'theme.helpline' | translate }}</span>
+      <span class="footer-row"><app-icon name="map-pin" [size]="18" color="#9fd3b2"></app-icon>{{ 'theme.office' | translate }}</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap footer-bottom-inner">
+      <span>© {{ 'theme.rights' | translate }}</span>
+      <span>{{ 'theme.powered' | translate }}<span *ngIf="appVersion"> · v{{ appVersion }}</span></span>
+    </div>
+  </div>
+</footer>

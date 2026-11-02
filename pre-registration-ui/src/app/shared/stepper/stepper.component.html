@@ -1,9 +1,45 @@
-<div class="container">
-  <div><p [ngClass]="classes.step1.p"><img src="assets/demographic_details.png" alt="Demographic details" [ngClass]="classes.step1.icon"/>&nbsp; {{'stepper.link_demographic'| translate}} </p></div>
-  <div><hr [ngClass]="classes.step1.line"/></div>
-  <div><p [ngClass]="classes.step2.p"><img src="assets/upload_document.png"  alt="Upload document" [ngClass]="classes.step2.icon" />&nbsp; {{'stepper.link_upload_doc'| translate}}</p></div>
-  <div><hr [ngClass]="classes.step2.line"/></div>
-  <div><p [ngClass]="classes.step3.p"><img src="assets/book_appointment.png" alt="Book appointment" [ngClass]="classes.step3.icon"/>&nbsp;  {{'stepper.link_book'| translate}} </p></div>
-  <div><hr [ngClass]="classes.step3.line"/></div>
-  <div><p [ngClass]="classes.step4.p"><img src="assets/confirmation.png" alt="Confirmation" [ngClass]="classes.step4.icon" />&nbsp;   {{'stepper.link_confirm'| translate}}</p></div>
-</div>
+<ol class="stepper">
+  <li class="stepper-item" [ngClass]="classes.step1.p">
+    <span class="stepper-dot">
+      <app-icon *ngIf="classes.step1.p[0] === 'complete'" name="check" [size]="20" [stroke]="3"></app-icon>
+      <app-icon *ngIf="classes.step1.p[0] !== 'complete'" name="file-text" [size]="19"></app-icon>
+    </span>
+    <span class="stepper-text">
+      <span class="stepper-num">{{ 'theme.step' | translate }} 1</span>
+      <span class="stepper-label">{{ 'stepper.link_demographic' | translate }}</span>
+    </span>
+  </li>
+  <li class="stepper-line" [ngClass]="classes.step1.line" aria-hidden="true"></li>
+  <li class="stepper-item" [ngClass]="classes.step2.p">
+    <span class="stepper-dot">
+      <app-icon *ngIf="classes.step2.p[0] === 'complete'" name="check" [size]="20" [stroke]="3"></app-icon>
+      <app-icon *ngIf="classes.step2.p[0] !== 'complete'" name="upload" [size]="19"></app-icon>
+    </span>
+    <span class="stepper-text">
+      <span class="stepper-num">{{ 'theme.step' | translate }} 2</span>
+      <span class="stepper-label">{{ 'stepper.link_upload_doc' | translate }}</span>
+    </span>
+  </li>
+  <li class="stepper-line" [ngClass]="classes.step2.line" aria-hidden="true"></li>
+  <li class="stepper-item" [ngClass]="classes.step3.p">
+    <span class="stepper-dot">
+      <app-icon *ngIf="classes.step3.p[0] === 'complete'" name="check" [size]="20" [stroke]="3"></app-icon>
+      <app-icon *ngIf="classes.step3.p[0] !== 'complete'" name="calendar" [size]="19"></app-icon>
+    </span>
+    <span class="stepper-text">
+      <span class="stepper-num">{{ 'theme.step' | translate }} 3</span>
+      <span class="stepper-label">{{ 'stepper.link_book' | translate }}</span>
+    </span>
+  </li>
+  <li class="stepper-line" [ngClass]="classes.step3.line" aria-hidden="true"></li>
+  <li class="stepper-item" [ngClass]="classes.step4.p">
+    <span class="stepper-dot">
+      <app-icon *ngIf="classes.step4.p[0] === 'complete'" name="check" [size]="20" [stroke]="3"></app-icon>
+      <app-icon *ngIf="classes.step4.p[0] !== 'complete'" name="check-circle" [size]="19"></app-icon>
+    </span>
+    <span class="stepper-text">
+      <span class="stepper-num">{{ 'theme.step' | translate }} 4</span>
+      <span class="stepper-label">{{ 'stepper.link_confirm' | translate }}</span>
+    </span>
+  </li>
+</ol>
