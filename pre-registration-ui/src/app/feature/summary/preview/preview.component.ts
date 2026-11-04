@@ -78,13 +78,14 @@ export class PreviewComponent implements OnInit {
       this.userPrefLanguageDir = "rtl";
     }
     this.getLanguageLabels();
-    await this.getIdentityJsonFormat();
     // await this.getResidentDetails();
     // await this.getGenderDetails();
-    await this.getDynamicFieldValues(null);
-    await this.getUserInfo();
-    await this.getUserFiles();
-    await this.getDocumentCategories();
+    //independent chains are loaded in parallel
+    await Promise.all([
+      this.getIdentityJsonFormat().then(() => this.getDynamicFieldValues(null)),
+      this.getUserInfo().then(() => this.getUserFiles()),
+      this.getDocumentCategories(),
+    ]);
     this.previewData = this.user.request.demographicDetails.identity;
     this.initializeDataCaptureLanguages();
     this.calculateAge();
@@ -119,6 +120,7 @@ export class PreviewComponent implements OnInit {
       }
     });
     let controlId = "";
+    const locationNameRequests = [];
     for (let i = 0; i < this.controlIds.length; i++) {
 
       controlId = this.controlIds[i];
@@ -149,16 +151,17 @@ export class PreviewComponent implements OnInit {
       if (locations.includes(controlId)) {
         for (let j = 0; j < this.previewData[controlId].length; j++) {
           if (this.previewData[controlId][j].value && this.previewData[controlId][j].language) {
-            await this.fetchLocationName(
+            locationNameRequests.push(this.fetchLocationName(
               this.previewData[controlId][j].value,
               this.previewData[controlId][j].language,
               j,
               controlId
-            );
+            ));
           }
         }
       }
     }
+    await Promise.all(locationNameRequests);
     this.dataLoaded = true;
     //console.log(this.previewData);
   }

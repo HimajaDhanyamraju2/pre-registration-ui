@@ -155,13 +155,12 @@
                     </button>
                     <button
                       type="button"
-                      class="btn btn-sm btn-ghost danger"
+                      class="btn btn-sm btn-outline danger"
                       *ngIf="!(user.status === appStatusCodes.expired)"
                       (click)="onDelete(user)"
                       matTooltip="{{ 'helpText.deleteIcon' | translate }}"
-                      [attr.aria-label]="'helpText.deleteIcon' | translate"
                     >
-                      <app-icon name="trash" [size]="18"></app-icon>
+                      <app-icon name="trash" [size]="16"></app-icon>{{ 'theme.delete' | translate }}
                     </button>
                   </div>
                 </td>

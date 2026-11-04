@@ -132,6 +132,9 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     } else {
       this.userPrefLanguageDir = "rtl";
     }
+    //the applicants list for "same as" options is fetched alongside the page data
+    this.loginId = localStorage.getItem("loginId");
+    const applicantsLoaded = this.getAllApplicants();
     await this.initiateComponent();
     this.fullNameField = this.config.getConfigByKey(
       appConstants.CONFIG_KEYS.preregistration_identity_name
@@ -139,8 +142,8 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     this.getFileSize();
     this.allowedFiles = this.config.getConfigByKey(appConstants.CONFIG_KEYS.preregistration_document_alllowe_files).split(",");
     this.getAllowedFileTypes(this.allowedFiles);
-    this.loginId = localStorage.getItem("loginId");
-    await this.getAllApplicants();
+    await applicantsLoaded;
+    this.setApplicants();
     this.sameAs = this.registration.getSameAs();
     if (this.sameAs === "") {
       this.sameAsselected = false;
@@ -195,14 +198,17 @@ export class FileUploadComponent implements OnInit, OnDestroy {
    */
   private async initiateComponent() {
 
-    await this.getIdentityJsonFormat();
     this.isModify = localStorage.getItem("modifyDocument");
     this.activatedRoute.params.subscribe((param) => {
       this.preRegId = param["appId"];
     });
     if (this.preRegId) {
-      await this.getUserInfo();
-      await this.getUserFiles();
+      //independent requests are loaded in parallel
+      await Promise.all([
+        this.getIdentityJsonFormat(),
+        this.getUserInfo(),
+        this.getUserFiles(),
+      ]);
       if (!this.users[0].files) {
         this.users[0].files = this.userFiles;
       }
@@ -220,6 +226,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
       if (!this.users[0].files) {
         this.users[0].files = this.userFiles;
       }
+      await this.getIdentityJsonFormat();
       this.loggerService.info("active users", this.activeUsers);
     }
   }
@@ -649,7 +656,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
             //this.showErrorMessage(error);
           },
           () => {
-            this.setApplicants();
             resolve(true)
           }
         )

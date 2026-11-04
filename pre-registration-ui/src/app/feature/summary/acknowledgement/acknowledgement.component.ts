@@ -75,13 +75,19 @@ export class AcknowledgementComponent implements OnInit, OnDestroy {
     this.name = this.configService.getConfigByKey(
       appConstants.CONFIG_KEYS.preregistration_identity_name
     );
+    //the template does not depend on the application, so fetch it right away
+    const templateLoaded = this.getTemplate();
     await this.getUserInfo(this.preRegIds);
     //console.log(this.usersInfoArr);
+    const detailRequests = [];
     for (let i = 0; i < this.usersInfoArr.length; i++) {
-      await this.getRegCenterDetails(this.usersInfoArr[i].langCode, i);
-      await this.getLabelDetails(this.usersInfoArr[i].langCode, i);
-      await this.getUserLangLabelDetails(this.langCode, i);
+      detailRequests.push(
+        this.getRegCenterDetails(this.usersInfoArr[i].langCode, i),
+        this.getLabelDetails(this.usersInfoArr[i].langCode, i),
+        this.getUserLangLabelDetails(this.langCode, i)
+      );
     }
+    await Promise.all(detailRequests);
 
     let notificationTypes = this.configService
       .getConfigByKey(appConstants.CONFIG_KEYS.mosip_notification_type)
@@ -91,7 +97,7 @@ export class AcknowledgementComponent implements OnInit, OnDestroy {
     );
     
 
-    await this.apiCalls();
+    await Promise.all([this.apiCalls(), templateLoaded]);
     if (this.bookingService.getSendNotification()) {
       this.bookingService.resetSendNotification();
       await this.automaticNotification();
@@ -100,59 +106,55 @@ export class AcknowledgementComponent implements OnInit, OnDestroy {
     this.showSpinner = false;
   }
 
-  getUserInfo(preRegIds: string[]) {
-    return new Promise((resolve) => {
-      preRegIds.forEach(async (prid: any, index) => {
-        await this.getUserDetails(prid).then(async (user) => {
-          let regDto;
-          //console.log(user);
-          await this.getAppointmentDetails(prid).then((appointmentDetails) => {
-            regDto = appointmentDetails;
-          });
-          const demographicData = user["request"].demographicDetails.identity;
-          let applicationLanguages = Utils.getApplicationLangs(user["request"]);
-          applicationLanguages = Utils.reorderLangsForUserPreferredLang(applicationLanguages, this.langCode);
-          applicationLanguages.forEach(applicationLang => {
-            const nameListObj: NameList = {
-              preRegId: "",
-              fullName: "",
-              regDto: "",
-              status: "",
-              registrationCenter: "",
-              bookingData: "",
-              postalCode: "",
-              langCode: "",
-              labelDetails: [],
-              userLangLabelDetails: []
-            };
-            nameListObj.preRegId = user["request"].preRegistrationId;
-            nameListObj.status = user["request"].statusCode;
-            if (demographicData[this.name]) {
-              let nameValues = demographicData[this.name];
-              nameValues.forEach(nameVal => {
-                if (nameVal["language"] == applicationLang) {
-                  nameListObj.fullName = nameVal["value"];
-                }
-              });  
+  async getUserInfo(preRegIds: string[]) {
+    //load user and appointment details of all applications in parallel
+    const results = await Promise.all(
+      preRegIds.map((prid: any) =>
+        Promise.all([this.getUserDetails(prid), this.getAppointmentDetails(prid)])
+      )
+    );
+    results.forEach(([user, appointmentDetails]) => {
+      const regDto = appointmentDetails;
+      //console.log(user);
+      const demographicData = user["request"].demographicDetails.identity;
+      let applicationLanguages = Utils.getApplicationLangs(user["request"]);
+      applicationLanguages = Utils.reorderLangsForUserPreferredLang(applicationLanguages, this.langCode);
+      applicationLanguages.forEach(applicationLang => {
+        const nameListObj: NameList = {
+          preRegId: "",
+          fullName: "",
+          regDto: "",
+          status: "",
+          registrationCenter: "",
+          bookingData: "",
+          postalCode: "",
+          langCode: "",
+          labelDetails: [],
+          userLangLabelDetails: []
+        };
+        nameListObj.preRegId = user["request"].preRegistrationId;
+        nameListObj.status = user["request"].statusCode;
+        if (demographicData[this.name]) {
+          let nameValues = demographicData[this.name];
+          nameValues.forEach(nameVal => {
+            if (nameVal["language"] == applicationLang) {
+              nameListObj.fullName = nameVal["value"];
             }
-            if (demographicData["postalCode"]) {
-              nameListObj.postalCode = demographicData["postalCode"];
-            }
-            nameListObj.registrationCenter = "";
-            nameListObj.langCode = applicationLang;
-            nameListObj.regDto = regDto;
-            this.usersInfoArr.push(nameListObj);
-            //console.log(this.usersInfoArr);
-            this.applicantContactDetails.push({
-              "preRegId": user["request"].preRegistrationId,
-              "phone": demographicData["phone"],
-              "email": demographicData["email"]
-            });
-          });
-        });
-        if (index === preRegIds.length - 1) {
-          resolve(true);
+          });  
         }
+        if (demographicData["postalCode"]) {
+          nameListObj.postalCode = demographicData["postalCode"];
+        }
+        nameListObj.registrationCenter = "";
+        nameListObj.langCode = applicationLang;
+        nameListObj.regDto = regDto;
+        this.usersInfoArr.push(nameListObj);
+        //console.log(this.usersInfoArr);
+        this.applicantContactDetails.push({
+          "preRegId": user["request"].preRegistrationId,
+          "phone": demographicData["phone"],
+          "email": demographicData["email"]
+        });
       });
     });
   }
@@ -196,9 +198,14 @@ export class AcknowledgementComponent implements OnInit, OnDestroy {
   }
 
   getRegCenterDetails(langCode, index) {
+    const regDto = this.usersInfoArr[index].regDto;
+    const regCenterId =
+      regDto && regDto["registration_center_id"]
+        ? regDto["registration_center_id"]
+        : this.regCenterId;
     return new Promise((resolve) => {
       this.dataStorageService
-        .getRegistrationCentersById(this.regCenterId, langCode)
+        .getRegistrationCentersById(regCenterId, langCode)
         .subscribe((response) => {
           if (response[appConstants.RESPONSE]) {
             this.usersInfoArr[index].registrationCenter =
@@ -382,24 +389,21 @@ export class AcknowledgementComponent implements OnInit, OnDestroy {
   }
 
   async apiCalls() {
-    return new Promise(async (resolve) => {
-      this.formatDateTime();
-      await this.qrCodeForUser();
-      await this.getTemplate();
-     
-      resolve(true);
-    });
+    this.formatDateTime();
+    await this.qrCodeForUser();
   }
 
   async qrCodeForUser() {
-    return new Promise((resolve) => {
-      this.usersInfoArr.forEach(async (user) => {
-        //console.log(user);
-        await this.generateQRCode(user);
-        if (this.usersInfoArr.indexOf(user) === this.usersInfoArr.length - 1) {
-          resolve(true);
-        }
-      });
+    //the QR code depends only on the preRegId, so generate it once per application
+    //and share it across all language entries of that application
+    const firstEntries = this.usersInfoArr.filter(
+      (user, index) =>
+        this.usersInfoArr.findIndex((u) => u.preRegId === user.preRegId) === index
+    );
+    await Promise.all(firstEntries.map((user) => this.generateQRCode(user)));
+    this.usersInfoArr.forEach((user) => {
+      const first = firstEntries.find((u) => u.preRegId === user.preRegId);
+      user.qrCodeBlob = first.qrCodeBlob;
     });
   }
 

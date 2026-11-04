@@ -108,8 +108,11 @@ export class TimeSelectionComponent
         this.apiErrorCodes = response[appConstants.API_ERROR_CODES];
         this.DAYS = response["DAYS"];
       });
-    await this.getUserInfo(this.preRegId);
-    await this.getRegCenterDetails();
+    //independent requests are loaded in parallel
+    await Promise.all([
+      this.getUserInfo(this.preRegId),
+      this.getRegCenterDetails(),
+    ]);
     this.prepareNameList(this.userInfo, this.regCenterInfo);
     this.days = this.configService.getConfigByKey(
       appConstants.CONFIG_KEYS.preregistration_availability_noOfDays
@@ -121,15 +124,11 @@ export class TimeSelectionComponent
     this.getSlotsforCenter(this.registrationCenter);  
   }
 
-  getUserInfo(preRegId) {
-    return new Promise(async (resolve) => {
-      for (let i = 0; i < preRegId.length; i++) {
-        await this.getUserDetails(preRegId[i]).then((user) =>
-          this.userInfo.push(user)
-        );
-      }
-      resolve(true);
-    });
+  async getUserInfo(preRegId) {
+    const users = await Promise.all(
+      preRegId.map((prid) => this.getUserDetails(prid))
+    );
+    this.userInfo.push(...users);
   }
 
   getUserDetails(prid) {

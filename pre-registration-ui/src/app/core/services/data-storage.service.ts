@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError, map, shareReplay } from "rxjs/operators";
 
 import * as appConstants from "../../app.constants";
 import { AppConfigService } from "../../app-config.service";
@@ -36,8 +38,40 @@ export class DataStorageService {
   BASE_URL = this.appConfigService.getConfig()["BASE_URL"];
   PRE_REG_URL = this.appConfigService.getConfig()["PRE_REG_URL"];
 
+  /**
+   * In-memory cache for GET requests whose response does not change during a session
+   * (ui spec, i18n labels, master data). Failed requests are evicted so they get retried.
+   */
+  private responseCache = new Map<string, Observable<any>>();
+
+  /**
+   * @description Performs a GET request once and replays the response to later callers.
+   * Each caller receives a deep copy, so components can safely mutate the response.
+   *
+   * @param {string} url
+   * @param {HttpParams} [params]
+   * @returns an `Observable` of the body as an `Object`
+   * @memberof DataStorageService
+   */
+  private cachedGet(url: string, params?: HttpParams): Observable<any> {
+    const key = params ? url + "?" + params.toString() : url;
+    if (!this.responseCache.has(key)) {
+      const request = this.httpClient.get(url, params ? { params } : {}).pipe(
+        catchError((error) => {
+          this.responseCache.delete(key);
+          return throwError(error);
+        }),
+        shareReplay(1)
+      );
+      this.responseCache.set(key, request);
+    }
+    return this.responseCache
+      .get(key)
+      .pipe(map((response) => JSON.parse(JSON.stringify(response))));
+  }
+
   getI18NLanguageFiles(langCode: string) {
-    return this.httpClient.get(`./assets/i18n/${langCode}.json`);
+    return this.cachedGet(`./assets/i18n/${langCode}.json`);
   }
 
   getUsers(userId: string) {
@@ -77,7 +111,7 @@ export class DataStorageService {
       this.PRE_REG_URL +
       "proxy" +
       appConstants.APPEND_URL.gender;
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   /**
@@ -93,7 +127,7 @@ export class DataStorageService {
       this.PRE_REG_URL +
       "proxy" +
       appConstants.APPEND_URL.resident;
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   /**
@@ -238,7 +272,7 @@ export class DataStorageService {
   }
 
   getLocationTypeData() {
-    return this.httpClient.get(
+    return this.cachedGet(
       this.BASE_URL +
         this.PRE_REG_URL +
         "proxy" +
@@ -259,11 +293,11 @@ export class DataStorageService {
       "/" +
       langCode;
     //console.log(url);
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   getLocationsHierarchyByLangCode(langCode: string, locCode: string) {
-    return this.httpClient.get(
+    return this.cachedGet(
       this.BASE_URL +
         this.PRE_REG_URL +
         "proxy" +
@@ -323,7 +357,7 @@ export class DataStorageService {
       location +
       appConstants.APPENDER +
       lang;
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   deleteFile(documentId, preRegId) {
@@ -342,7 +376,7 @@ export class DataStorageService {
   }
 
   getSecondaryLanguageLabels(langCode: string) {
-    return this.httpClient.get(`./assets/i18n/${langCode}.json`);
+    return this.cachedGet(`./assets/i18n/${langCode}.json`);
   }
 
   copyDocument(sourceId: string, destinationId: string) {
@@ -411,7 +445,7 @@ export class DataStorageService {
       locationCode +
       "/" +
       langCode;
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   recommendedCenters(
@@ -453,7 +487,7 @@ export class DataStorageService {
       id +
       "/" +
       langCode;
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   getGuidelineTemplate(templateType: string) {
@@ -466,7 +500,7 @@ export class DataStorageService {
       "/" +
       templateType;
     localStorage.setItem("consentUrl", url);
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   getApplicantType(docuemntCategoryDto) {
@@ -490,12 +524,13 @@ export class DataStorageService {
       applicantCode +
       "/languages";
     //console.log(APPLICANT_VALID_DOCUMENTS_URL);
-    return this.httpClient.get(APPLICANT_VALID_DOCUMENTS_URL, {
-      params: new HttpParams().append(
+    return this.cachedGet(
+      APPLICANT_VALID_DOCUMENTS_URL,
+      new HttpParams().append(
         appConstants.PARAMS_KEYS.getDocumentCategories,
         localStorage.getItem("langCode")
-      ),
-    });
+      )
+    );
   }
   
   getDocumentCategoriesByLang(applicantCode, langCode) {
@@ -506,12 +541,13 @@ export class DataStorageService {
       applicantCode +
       "/languages";
     //console.log(APPLICANT_VALID_DOCUMENTS_URL);  
-    return this.httpClient.get(APPLICANT_VALID_DOCUMENTS_URL, {
-      params: new HttpParams().append(
+    return this.cachedGet(
+      APPLICANT_VALID_DOCUMENTS_URL,
+      new HttpParams().append(
         appConstants.PARAMS_KEYS.getDocumentCategories,
         langCode
-      ),
-    });
+      )
+    );
   }
 
   getConfig() {
@@ -593,7 +629,7 @@ export class DataStorageService {
       registartionCenterId +
       "/" +
       langCode;
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   /**
@@ -622,11 +658,11 @@ export class DataStorageService {
   getIdentityJson() {
     //const url = this.BASE_URL + this.PRE_REG_URL+ 'applications/config';
     let url = this.BASE_URL + this.PRE_REG_URL + `uispec/latest`;
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   getRegistrationCentersById(regCenterId, langCode: string) {
-    return this.httpClient.get(
+    return this.cachedGet(
       this.BASE_URL +
         this.PRE_REG_URL +
         "proxy" +
@@ -656,7 +692,7 @@ export class DataStorageService {
       appConstants.APPEND_URL.master_data +
       `dynamicfields?langCode=${langCode}`;
     ////console.log(url);
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   getDynamicFieldsandValuesForAllLang(pageNumber: string) {
@@ -665,9 +701,9 @@ export class DataStorageService {
       this.PRE_REG_URL +
       "proxy" +
       appConstants.APPEND_URL.master_data +
-      `dynamicfields?pageNumber=${pageNumber}&pageSize=10`;
+      `dynamicfields?pageNumber=${pageNumber}&pageSize=100`;
     ////console.log(url);
-    return this.httpClient.get(url);
+    return this.cachedGet(url);
   }
 
   updateDocRefId(fileDocumentId, preId, refNumber) {

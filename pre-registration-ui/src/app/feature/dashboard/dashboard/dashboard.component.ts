@@ -137,7 +137,21 @@ export class DashBoardComponent implements OnInit, OnDestroy {
     this.name = this.configService.getConfigByKey(
       appConstants.CONFIG_KEYS.preregistration_identity_name
     );
+    this.prefetchMasterData();
     await this.getIdentityJsonFormat();
+  }
+
+  /**
+   * @description Warms the DataStorageService cache with master data needed on the
+   * consent and demographic screens, so they open faster after the dashboard.
+   *
+   * @private
+   * @memberof DashBoardComponent
+   */
+  private prefetchMasterData() {
+    const ignoreError = () => {};
+    this.dataStorageService.getDynamicFieldsandValuesForAllLang("0").subscribe(ignoreError, ignoreError);
+    this.dataStorageService.getGuidelineTemplate("consent").subscribe(ignoreError, ignoreError);
   }
 
   async getIdentityJsonFormat() {

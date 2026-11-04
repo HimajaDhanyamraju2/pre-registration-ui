@@ -863,6 +863,7 @@
       "ackGuidelines": "Orientações",
       "backApps": "Voltar a Os meus pedidos",
       "backLogin": "Voltar ao início de sessão",
-      "contactPlaceholder": "[Conteúdo a fornecer pela autoridade de registo]"
+      "contactPlaceholder": "[Conteúdo a fornecer pela autoridade de registo]",
+      "delete": "Excluir"
   }
 }

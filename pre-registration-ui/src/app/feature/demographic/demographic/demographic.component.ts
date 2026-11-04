@@ -188,6 +188,7 @@ export class DemographicComponent
    * @memberof DemographicComponent
    */
   async ngOnInit() {
+    this.prefetchMasterData();
     await this.initialization();
     await this.initializeDataCaptureLanguages();
     //set translation service
@@ -196,9 +197,12 @@ export class DemographicComponent
     this.setLocaleForDatePicker();
     //load all labels in the userPrefLanguage or loginLang
     this.getPrimaryLabels();
-    await this.getIdentityJsonFormat();
+    //independent requests are loaded in parallel
+    await Promise.all([
+      this.getIdentityJsonFormat(),
+      this.getConsentMessage(),
+    ]);
     this.config = this.configService.getConfig();
-    await this.getConsentMessage();
     // this.validationMessage = appConstants.errorMessages;
     this.initForm();
     await this.setFormControlValues();
@@ -227,6 +231,21 @@ export class DemographicComponent
     this.checkToShowLangChangeBtn();
     //console.log("exiting");
     this.primaryuserForm = true;
+  }
+
+  /**
+   * @description Starts the requests for data that does not depend on the application,
+   * so they run while the rest of the initialization is in progress. The responses are
+   * cached by DataStorageService and reused by the methods that process them.
+   *
+   * @private
+   * @memberof DemographicComponent
+   */
+  private prefetchMasterData() {
+    const ignoreError = () => {};
+    this.dataStorageService.getIdentityJson().subscribe(ignoreError, ignoreError);
+    this.dataStorageService.getDynamicFieldsandValuesForAllLang("0").subscribe(ignoreError, ignoreError);
+    this.dataStorageService.getGuidelineTemplate("consent").subscribe(ignoreError, ignoreError);
   }
 
   ngAfterViewInit() {

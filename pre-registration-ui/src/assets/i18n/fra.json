@@ -840,6 +840,7 @@
       "ackGuidelines": "Guidelines",
       "backApps": "Back to My Applications",
       "backLogin": "Back to Login",
-      "contactPlaceholder": "[Content to be provided by the registration authority]"
+      "contactPlaceholder": "[Content to be provided by the registration authority]",
+      "delete": "Delete"
   }
 }

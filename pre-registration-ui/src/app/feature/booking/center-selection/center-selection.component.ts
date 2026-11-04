@@ -85,14 +85,23 @@ export class CenterSelectionComponent
       });
     }
     this.getErrorLabels();
-    await this.getUserInfo(this.preRegId);
     this.REGISTRATION_CENTRES = [];
     this.selectedCentre = null;
     this.recommendedCenterLocCode = Number(this.configService.getConfigByKey(
       appConstants.CONFIG_KEYS.preregistration_recommended_centers_locCode
     ));
     console.log(`recommendedCenterLocCode: ${this.recommendedCenterLocCode}`);
-    await this.getIdentityJsonFormat();
+    //independent requests are loaded in parallel
+    await Promise.all([
+      this.getUserInfo(this.preRegId),
+      this.getIdentityJsonFormat(),
+      this.getLocationTypes(),
+    ]);
+    this.getRecommendedCenters();
+  }
+
+  getLocationTypes() {
+    return new Promise((resolve) => {
     const subs = this.dataService
       .getLocationTypeData()
       .subscribe((response) => {
@@ -113,21 +122,20 @@ export class CenterSelectionComponent
         this.locationTypes.sort(function (a, b) {
           return a.hierarchyLevel - b.hierarchylevel;
         });
-        this.getRecommendedCenters();
+        resolve(true);
+      },
+      (error) => {
+        this.showErrorMessage(error);
       });
     this.subscriptions.push(subs);
-    
+    });
   }
 
-  getUserInfo(preRegId) {
-    return new Promise(async (resolve) => {
-      for (let i = 0; i < preRegId.length; i++) {
-        await this.getUserDetails(preRegId[i]).then((user) =>
-          this.users.push(user)
-        );
-      }
-      resolve(true);
-    });
+  async getUserInfo(preRegId) {
+    const users = await Promise.all(
+      preRegId.map((prid) => this.getUserDetails(prid))
+    );
+    this.users.push(...users);
   }
 
   getUserDetails(prid) {
@@ -224,15 +232,9 @@ export class CenterSelectionComponent
   }
 
   getLocationNamesByCodes() {
-    return new Promise((resolve) => {
-      this.locationCodes.forEach(async (pins,index) => {
-        //console.log(pins);
-        await this.getLocationNames(pins);
-        if(index===this.locationCodes.length-1){
-          resolve(true);
-        }
-      });
-    });
+    return Promise.all(
+      this.locationCodes.map((pins) => this.getLocationNames(pins))
+    );
   }
 
   getRecommendedCentersApiCall() {
